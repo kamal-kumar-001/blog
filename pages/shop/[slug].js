@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import mongoose from 'mongoose';
+import connectDb from '../../middleware/mongoose';
 import Product from '../../models/shop/Product';
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
@@ -46,9 +46,7 @@ const Post = ({ addToCart, product }) => {
 
 export async function getServerSideProps(context) {
 
-  if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGO_URI)
-  }
+  await connectDb();
   let product = await Product.findOne({ slug: context.query.slug })
   return {
     props: { product: JSON.parse(JSON.stringify(product)) },

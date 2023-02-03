@@ -1,5 +1,5 @@
 import React  from 'react';
-import mongoose from 'mongoose'
+import connectDb from '../middleware/mongoose';
 import Product from '../models/Shop/Product';
 import Layout from '../components/Layout';
 import Container from '../components/container';
@@ -36,10 +36,7 @@ const Products  = ({ products }) => {
   );
 };
 export async function getServerSideProps(context) {
-  if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGO_URL)
-  }
-
+  await connectDb();
   let products = await Product.find()
 
   return {

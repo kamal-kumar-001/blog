@@ -3,6 +3,7 @@ import Router from 'next/router';
 import User from '../../../models/User';
 import connectDb from '../../../middleware/mongoose';
 import WithAuth from '../withAuth';
+import Link from 'next/link';
 
 const UpdateUser = ({ user }) => {
   const [name, setName] = useState(user.name);

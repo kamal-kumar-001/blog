@@ -3,7 +3,7 @@ import Layout from '../components/Layout';
 import Container from '../components/container';
 import Link from 'next/link';
 import User from '../models/User'
-import mongoose from 'mongoose'
+import connectDb from '../middleware/mongoose'
 import Image from "next/image";
 const About = ({authors}) => {
   return (
@@ -57,9 +57,7 @@ const About = ({authors}) => {
   )
 }
 export async function getServerSideProps(context) {
-    if (!mongoose.connections[0].readyState) {
-        await mongoose.connect(process.env.MONGO_URL)
-      }
+    await connectDb();
     
       let user = await User.find();
     

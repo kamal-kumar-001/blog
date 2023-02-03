@@ -43,14 +43,14 @@ const Login = () => {
     <form onSubmit={handleSubmit}>
   <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
     <h1 className="font-bold text-center text-2xl mb-5">Admin</h1>  
-    <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
+    <div className=" shadow w-full rounded-lg divide-y">
       <div className="px-5 py-7">
-        <label className="font-semibold text-sm text-gray-600 pb-1 block">E-mail</label>
+        <label className="font-semibold text-sm  pb-1 block">E-mail</label>
         <input type="text" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           />
-        <label className="font-semibold text-sm text-gray-600 pb-1 block">Password</label>
+        <label className="font-semibold text-sm  pb-1 block">Password</label>
         <input type="password" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

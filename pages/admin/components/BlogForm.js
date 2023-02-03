@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-// import Layout from './components/AdminLayout';
-// import Blog from '../../models/Blog';
 import Router from 'next/router';
-// import WithAuth from './withAuth';
 import Link from 'next/link';
 import 'react-quill/dist/quill.snow.css'
 import dynamic from 'next/dynamic'
@@ -29,7 +26,7 @@ const BlogForm = ({mode, categories, users, initialValues}) => {
     let url = '';
     let method = '';
     if (mode === 'add') {
-      url = '/api/addBlog';
+      url = '/api/addApi?collection=blogs';
       method = 'POST';
     } else if (mode === 'update') {
       url = '/api/updateBlog';
@@ -96,13 +93,9 @@ const BlogForm = ({mode, categories, users, initialValues}) => {
   ]
     return (
         <form className='p-5' onSubmit={handleSubmit}>
-        <div className="flex gap-5 justify-between">
-      <h1 className="text-2xl flex-1  font-bold mb-4">Add {mode}</h1>
-      <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
-        >
-           <Link href={"/admin"}>Cancel</Link>
-        </button>
+        <div className="flex gap-5 justify-between items-center">
+      <h1 className="text-2xl flex-1  font-bold mb-4">{mode} Blog</h1>
+           <Link href={"/admin"} className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded" >Cancel</Link>
       <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
           type="submit"
@@ -214,9 +207,9 @@ const BlogForm = ({mode, categories, users, initialValues}) => {
             required
           /> */}
           <RichEditor 
+          className=' h-96'
            modules={modules} formats={formats} theme="snow"
           id="content"
-          rows="8"
           value={content}
           onChange={setContent}
           // onChange={(e) => setContent(e.target.value)}

@@ -40,7 +40,8 @@ const ViewContact = ({ contact }) => {
                     href="/admin/replyContact/[contact]" 
                     as={`/admin/replyContact/${contact._id}`}
                   >
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2">
+                    <button 
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2">
                       Reply
                     </button>
                   </Link>

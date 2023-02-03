@@ -9,7 +9,7 @@ const AdminAddCategory = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('/api/addCategory', {
+    const res = await fetch('/api/addApi?collection=categories', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

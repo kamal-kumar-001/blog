@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import Tabs from '../../components/Tabs.js';
-import mongoose from 'mongoose'
+import connectDb from '../../middleware/mongoose';
 import Category from '../../models/Category';
 import Blog from '../../models/Blog'
 import BlogList from '../../components/blogList';
@@ -23,9 +23,7 @@ const Categories = ({ categories, blogs}) => {
   </Layout>
 }
 export async function getServerSideProps(context) {
-  if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGO_URL)
-  }
+  await connectDb();
   let getBlogs = await Blog.find().populate('user').populate("category").sort({createdAt: -1});
   let categories = await Category.find().sort({createdAt: -1});
   return {

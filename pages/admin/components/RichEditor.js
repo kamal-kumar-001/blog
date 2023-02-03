@@ -26,10 +26,6 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
           matchVisual: false,
         },
       }
-      /*
-       * Quill editor formats
-       * See https://quilljs.com/docs/formats/
-       */
       const formats = [
         'header',
         'font',
@@ -48,6 +44,6 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
       ]
       
       export default function RichEditor() {
-        return <QuillNoSSRWrapper modules={modules} formats={formats} theme="snow" />
+        return <QuillNoSSRWrapper className=' h-96' modules={modules} formats={formats} theme="snow" />
       }
    

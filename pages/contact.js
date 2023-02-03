@@ -29,7 +29,7 @@ export default function Contact() {
 
     if (res.ok) {
       setIsSuccess(true);
-      setResponse("Thank you for Contacting US");
+      setResponse("Thank you for Contacting Us");
     } else {
       setResponse("Something went wrong, please try again later.");
     }
@@ -80,6 +80,16 @@ export default function Contact() {
           </div>
           <div>
             <form  className="my-10" onSubmit={handleSubmit} >
+            {isSuccess && (
+             <div className="mb-3 text-sm text-center text-green-500">
+               {response}
+             </div>
+           )}
+             {/* { !isSuccess && (
+              <div className="mb-3 text-sm text-center text-red-500">
+                {response || "Something went wrong. Please try later."}
+              </div>
+            )} */}
 
               <div className="mb-5">
                 <input
@@ -127,17 +137,6 @@ export default function Contact() {
                   Send Message
               </button>
             </form>
-
-           {isSuccess && (
-             <div className="mt-3 text-sm text-center text-green-500">
-               {response}
-             </div>
-           )}
-             {/* { !isSuccess && (
-              <div className="mt-3 text-sm text-center text-red-500">
-                {response || "Something went wrong. Please try later."}
-              </div>
-            )} */}
           </div>
         </div>
       </Container>

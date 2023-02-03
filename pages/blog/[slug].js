@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Blog from '../../models/Blog'
 import User from '../../models/User'
 import Category from '../../models/Category'
-import mongoose from 'mongoose'
+import connectDb from '../../middleware/mongoose';
 import Link from 'next/link';
 // import cheerio from 'cheerio';
 // import Head from 'next/head';
@@ -155,9 +155,7 @@ const Post = ({ blogs, author, category, page, pageCount }) => {
   </>
 }
 export async function getServerSideProps(context) {
-  if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGO_URL)
-  }
+  await connectDb();
   let page = context.query.page ? parseInt(context.query.page) : 1;
   
   let limit = 1; // number of posts per page

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React  from 'react';
 import BlogList from '../components/blogList';
-import Tabs from '../components/Tabs';
 import Blog from '../models/Blog'
-import mongoose from 'mongoose'
 import Category from '../models/Category';
 import Layout from '../components/Layout';
 import Container from '../components/container';
+import connectDb from "../middleware/mongoose"
 import Link from 'next/link';
 
 const Blogs  = ({ blogs,author, categories }) => {
@@ -51,9 +50,7 @@ const Blogs  = ({ blogs,author, categories }) => {
   );
 };
 export async function getServerSideProps(context) {
-  if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGO_URL)
-  }
+  await connectDb();
 
   let blogs = await Blog.find().populate("user").populate("category").sort({createdAt: -1});
   let categories = await Category.find();

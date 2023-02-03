@@ -13,7 +13,7 @@ const AdminAddUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('/api/addUser', {
+    const res = await fetch('/api/addApi?collection=users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

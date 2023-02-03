@@ -14,7 +14,7 @@ const AdminAddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('/api/addProduct', {
+    const res = await fetch('/api/addApi?collection=products', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

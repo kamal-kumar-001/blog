@@ -2,7 +2,7 @@ import Head from 'next/head';
 import BlogList from '../components/blogList';
 import Tabs from '../components/Tabs';
 import Blog from '../models/Blog'
-import mongoose from 'mongoose'
+import connectDb from '../middleware/mongoose';
 import Category from '../models/Category';
 // import qs from 'qs';
 import Pagination from '../components/Pagination';
@@ -83,11 +83,7 @@ const Home = ({ categories, blogs, page, pageCount }) => {
 
 
 export async function getServerSideProps(context) {
-  if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGO_URL)
-  }
-
-  // let blogs = await Blog.find().populate('user').populate('category').sort({createdAt: -1});
+  await connectDb();
   
   let categories = await Category.find().sort({createdAt: -1});
   let page = context.query.page ? parseInt(context.query.page) : 1;
