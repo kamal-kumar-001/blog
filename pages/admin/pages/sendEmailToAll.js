@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Layout from './components/AdminLayout';
-import WithAuth from './withAuth';
-import Email from '../../models/Email';
-import connectDb from '../../middleware/mongoose';
+import Layout from '../components/AdminLayout';
+import WithAuth from '../withAuth';
+import Email from '../../../models/Email';
+import connectDb from '../../../middleware/mongoose';
 import Link from 'next/link';
 
 const SendEmailToAll = ({email}) => {

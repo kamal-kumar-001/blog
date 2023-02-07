@@ -1,33 +1,29 @@
 import React, { useState } from 'react';
-import Layout from './components/AdminLayout';
+// import Layout from '../../components/AdminLayout';
 import Router from 'next/router';
-import WithAuth from './withAuth';
+import WithAuth from '../../withAuth';
 import Link from 'next/link';
 
 const AdminAddUser = () => {
   const [name, setName] = useState('');
-  const [img, setImg] = useState('');
-  const [email, setEmail] = useState('');
-  // const [isAdmin, setIsAdmin] = useState('');
-  const [password, setPassword] = useState('');
+  const [position, setPosition] = useState('');
+  const [slug, setSlug] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('/api/addApi?collection=users', {
+    const res = await fetch('/api/addApi?collection=navItems', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            position: position,
             name: name,
-            email: email,
-            img: img,
-            // isAdmin: isAdmin,
-            password: password,
+            slug: slug,
         })
     });
     if (res.ok) {
-        Router.push('/admin');
+        Router.push('/admin/pages/navbar');
     }
 };
 
@@ -35,11 +31,11 @@ const AdminAddUser = () => {
   return (
     <form className='p-5' onSubmit={handleSubmit}>
         <div className="flex gap-5 justify-between">
-      <h1 className="text-2xl flex-1  font-bold mb-4">Add User</h1>
+      <h1 className="text-2xl flex-1  font-bold mb-4">Add NavItem</h1>
       <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
         >
-           <Link href={"/admin"}>Cancel</Link>
+           <Link href={"/admin/pages/navbar"}>Cancel</Link>
         </button>
       <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
@@ -47,6 +43,22 @@ const AdminAddUser = () => {
         >
           Save
         </button>
+    </div>
+    <div className="mb-4">
+      <label
+        className="block font-bold mb-2"
+        htmlFor="position"
+      >
+        Position
+      </label>
+      <input
+        className="border border-gray-400 p-2 w-full"
+        type="text"
+        id="position"
+        value={position}
+    onChange={(e) => setPosition(e.target.value)}
+        required
+      />
     </div>
     <div className="mb-4">
       <label
@@ -67,35 +79,17 @@ const AdminAddUser = () => {
     <div className="mb-4">
       <label
         className="block font-bold mb-2"
-        htmlFor="email"
+        htmlFor="slug"
       >
-        Email
+        Slug
       </label>
       <input
         className="border border-gray-400 p-2 w-full"
-        type="email"
-        id="email"
-        value={email}
-    onChange={(e) => setEmail(e.target.value)}
+        type="text"
+        id="slug"
+        value={slug}
+    onChange={(e) => setSlug(e.target.value)}
         required
-      />
-    </div>
-    <div className="mb-4">
-      <label className="block font-bold mb-2">Image URL</label>
-      <input
-        type="text"
-        className="border border-gray-400 p-2 w-full"
-        value={img}
-        onChange={(e) => setImg(e.target.value)}
-      />
-    </div>
-    <div className="mb-4">
-      <label className="block font-bold mb-2">Password</label>
-      <input
-        type="text"
-        className="border border-gray-400 p-2 w-full"
-        value={password}
-    onChange={(e) => setPassword(e.target.value)}
       />
     </div>
 
@@ -104,6 +98,7 @@ const AdminAddUser = () => {
 };
 
 export default WithAuth(AdminAddUser);
+// export default AdminAddUser;
 
 
 

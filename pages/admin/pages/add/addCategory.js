@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
-import WithAuth from './withAuth';
+import WithAuth from '../../withAuth';
 import Link from 'next/link';
 
 const AdminAddCategory = () => {
@@ -20,7 +20,7 @@ const AdminAddCategory = () => {
         })
     });
     if (res.ok) {
-        Router.push('/admin');
+        Router.push('/admin/pages/categories');
     }
 };
 

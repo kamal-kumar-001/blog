@@ -1,10 +1,10 @@
-import Layout from './components/AdminLayout';
+import Layout from '../components/AdminLayout';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import Contact from '../../models/Contact';
+import Contact from '../../../models/Contact';
 import mongoose from 'mongoose'
 import Router from 'next/router';
-import WithAuth from './withAuth';
+import WithAuth from '../withAuth';
 
 const ViewContact = ({ contact }) => {
   return (
@@ -69,4 +69,4 @@ export async function getServerSideProps(context){
     }
 }
 
-export default WithAuth(ViewContact);
+export default ViewContact;

@@ -49,9 +49,13 @@ const BlogForm = ({mode, categories, users, initialValues}) => {
         })
     });
     if (res.ok) {
+      
         Router.push('/admin');
     }
   };
+  // const handleFileChange = (e) => {
+  //   setImg(e.target.files[0]);
+  // };
   const modules = {
     toolbar: [
       [{ header: '1' }, { header: '2' }, { font: [] }],

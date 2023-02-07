@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const NewsLetter = () => {
 
     const [name, setName] = useState('');
@@ -17,14 +18,15 @@ const NewsLetter = () => {
       });
   
       if (res.ok) {
-        console.log('Email sent successfully');
+        toast.success('Email sent successfully');
       } else {
-        console.error('Failed to send email');
+        toast.error('Failed to send email');
       }
     };
 
     return (
         <form className="" onSubmit={handleSubmit}>
+         <ToastContainer></ToastContainer>
             <div className="container flex flex-wrap justify-center gap-3 items-center mx-auto md:px-10 py-8 text-center">
             
             <div className="break-words"><p className="text-2xl font-bold mb-2">Subscribe to Our Newsletter</p>Stay up to date with our latest news and updates.</div>
@@ -36,7 +38,7 @@ const NewsLetter = () => {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Name"
                   autoComplete="false"
-                  className=" w-1/3 px-3 py-2 border-2 placeholder:text-gray-800 dark:text-white rounded-md outline-none dark:placeholder:text-gray-200 dark:bg-gray-900   focus:ring-4  border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
+                  className=" w-1/3 px-3 py-2 border-2 placeholder:text-gray-800 dark:text-white rounded-md outline-none dark:placeholder:text-gray-200 dark:bg-gray-900  border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white "
                 />
                   <input
                   id="email"
@@ -47,10 +49,10 @@ const NewsLetter = () => {
                   name="email"
                   required
                   autoComplete="false"
-                  className="px-3 py-2 w-4/5 border-2 placeholder:text-gray-800 dark:text-white rounded-md outline-none dark:placeholder:text-gray-200 dark:bg-gray-900   focus:ring-4 border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
+                  className="px-3 py-2 w-4/5 border-2 placeholder:text-gray-800 dark:text-white rounded-md outline-none dark:placeholder:text-gray-200 dark:bg-gray-900   border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white "
                 />
                 </div>
-                <button type="submit" className="w-full py-4 font-semibold text-white transition-colors bg-gray-900 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-offset-2 focus:ring focus:ring-gray-200 px-7 dark:bg-white dark:text-black ">
+                <button type="submit" className="w-full py-4 font-semibold text-white transition-colors bg-gray-900 rounded-md hover:bg-gray-800 focus:outline-none   focus:ring-gray-200 px-7 dark:bg-white dark:text-black ">
                     Subscribe
                 </button>
                 </div>

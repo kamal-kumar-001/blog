@@ -6,6 +6,8 @@ import Navbar from "./Navbar";
 // import defaultOG from "../public/img/og-default.jpg";
 
 import Footer from "./Footer";
+// import Chatbot from "./aiChatbot";
+import ChatBot from './Chatbot'
 // import PopupWidget from "../components/popupWidget";
 
 export default function Layout(props) {
@@ -36,8 +38,8 @@ export default function Layout(props) {
           site_name: props.title
         }}
         twitter={{
-          handle: "@surjithctly",
-          site: "@surjithctly",
+          handle: "@",
+          site: "@",
           cardType: "summary_large_image"
         }}
       />
@@ -46,6 +48,8 @@ export default function Layout(props) {
         <Navbar {...props} />
         <div>{children}</div>
 
+        {/* <Chatbot /> */}
+        <ChatBot />
         <Footer {...props} />
       </div>
     </>
