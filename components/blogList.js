@@ -2,9 +2,10 @@ import Link from 'next/link';
 import React from 'react';
 import Image from "next/image";
 import { parseISO, format } from "date-fns";
-import {cx} from '../utils/all'
 
 const BlogList = ({ blogs, aspect }) => {
+  const cx = (...classNames) =>
+  classNames.filter(Boolean).join(" ");
   return (
     <>
       {/* <div className="grid gap-10 mt-10 lg:gap-10 md:grid-cols-2 xl:grid-cols-3 "> */}

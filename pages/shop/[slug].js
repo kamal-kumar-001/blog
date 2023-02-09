@@ -20,10 +20,10 @@ const Post = ({ addToCart, product }) => {
           <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-96 h-80 mt-10 px-20 object-top rounded" src={product.img} />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">Code Shop</h2>
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.title}</h1>
+            <h1 className=" text-3xl title-font font-medium mb-1">{product.title}</h1>
             <p className="leading-relaxed">{product.content}</p>
             <div className="space-y-6">
-              <div className="title-font font-medium text-2xl text-gray-900">₹{product.price}.00</div>
+              <div className="title-font font-medium text-2xl ">₹{product.price}.00</div>
               {/* <button onClick={() => { addToCart(slug, 1, product.price, product.title, size, color) }} className="flex ml-3 text-white bg-orange-500 border-0 py-2 px-4 focus:outline-none hover:bg-orange-600 rounded text-sm">Add To Cart</button> */}
               {/* <button onClick={() => { buyNow(slug, 1, product.price, product.title, size, color) }} className="flex ml-3 text-white bg-orange-500 border-0 py-2 px-4 focus:outline-none hover:bg-orange-600 rounded text-sm">Buy Now</button> */}
               <button  className="flex ml-3 text-white bg-orange-500 border-0 py-2 px-4 focus:outline-none hover:bg-orange-600 rounded text-sm">Add To Cart</button>

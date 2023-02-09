@@ -5,10 +5,10 @@ import ThemeSwitch from '../../../components/themeSwitch';
 import WithAuth from '../withAuth';
 
 const Layout = ({ children }) => {
-  const [click, setClick] = useState(false);
-  const handleDrop = () => {
-    setClick(!click)
-  }
+//   const [click, setClick] = useState(false);
+//   const handleDrop = () => {
+//     setClick(!click)
+//   }
   return (
     <>
       <style jsx global>{`
@@ -46,6 +46,9 @@ const Layout = ({ children }) => {
                   <Link href="/admin/pages/blogs" className=" mt-4 ">
                     Blogs
                   </Link>
+                  <Link href="/admin/pages/pages" className=" mt-4 ">
+                    Pages
+                  </Link>
                   <Link href="/admin/pages/categories" className=" mt-4 ">
                     Categories
                   </Link>
@@ -58,8 +61,8 @@ const Layout = ({ children }) => {
                   <Link href="/admin/pages/users" className=" mt-4 ">
                     Users
                   </Link>
-                  <Link href="/admin/pages/sendEmailToAll" className=" mt-4 ">
-                    Send Email To All
+                  <Link href="/admin/pages/newsLetter" className=" mt-4 ">
+                    News Letter
                   </Link>
                 </div>
               </div>

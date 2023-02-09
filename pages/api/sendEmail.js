@@ -20,6 +20,13 @@ export default async (req, res) => {
           user: "kkhatiwal1@gmail.com",
           pass: "rsjlyzyuvcpjscxd"
         }
+        // host: 'email-smtp.us-east-1.amazonaws.com',
+        // port: 587,
+        // secure: false, // true for 465, false for other ports
+        // auth: {
+        //   user: "AKIA4E3QV3SIJPX53K2E",
+        //   pass: "BPiqiO5nXgQWhZBUZh7u6sYt0OHlM5VoBJ7Oo+W02yn7"
+        // }
       });
   
       // send mail with defined transport object

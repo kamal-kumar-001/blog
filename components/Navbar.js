@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Container from "./container";
 import Link from "next/link";
 import Image from "next/image";
 import ThemeSwitch from "./themeSwitch";
@@ -18,7 +17,7 @@ export default function Navbar({ navItems }) {
   return (
     <header className="bg-white dark:bg-black sticky  z-20 top-0">
 
-      <nav className="container mx-auto lg:px-6 py-4">
+      <nav className="container mx-auto px-4 lg:px-6 py-4 lg:pb-0 md:pb-0">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center">
           <div className="flex md:flex-1 justify-between items-center">
             <div className="flex  items-center">

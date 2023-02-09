@@ -1,6 +1,6 @@
-import { cx } from "../utils/all";
-
 export default function Container(props) {
+  const cx = (...classNames) =>
+  classNames.filter(Boolean).join(" ");
   return (
     <div
       className={cx(

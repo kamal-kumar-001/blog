@@ -11,7 +11,7 @@ const PageSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    img: {
+    desc: {
         type: String,
         // required: true
     },

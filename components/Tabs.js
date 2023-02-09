@@ -22,11 +22,11 @@ const Tabs = ({ categories }) => {
       }
       `}
 </style>
-        <div className=" left-0 right-0 overflow-x-auto  mb-8 flex items-center bg-white dark:bg-black justify-between pt-2 border-b-2 border-gray-100 dark:border-gray-800 scroll-hidden sticky top-12 z-10 md:top-16">
-            <ul className="flex items-center container px-6 mx-auto">
+        <div className="  overflow-x-auto  mb-8  bg-white dark:bg-black  pt-2 border-b-2 border-gray-100 dark:border-gray-800 scroll-hidden sticky top-12 z-10 md:top-16">
+            <ul className="flex items-center container px-6 mx-auto w-max md:w-auto">
                 <li
                     className={
-                        'mr-6 pb-6  rounded-sm ' +
+                        'mr-6 py-3  rounded-sm ' +
                         `${
                             router.pathname === '/'
                                 ? ' text-primary'
@@ -40,7 +40,7 @@ const Tabs = ({ categories }) => {
                         <li
                             key={category._id}
                             className={
-                                'mr-6 pb-6  rounded-sm ' +
+                                'mr-6 py-3  rounded-sm ' +
                                 `${
                                     isActiveLink(category)
                                         ? ' text-primary dark:text-white'

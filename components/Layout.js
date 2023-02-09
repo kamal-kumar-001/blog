@@ -1,12 +1,10 @@
 import React from "react";
 import Head from "next/head";
 import { NextSeo } from "next-seo";
-// import GetImage from "@utils/getImage";
 import Navbar from "./Navbar";
 // import defaultOG from "../public/img/og-default.jpg";
 
 import Footer from "./Footer";
-// import Chatbot from "./aiChatbot";
 import ChatBot from './Chatbot'
 // import PopupWidget from "../components/popupWidget";
 
