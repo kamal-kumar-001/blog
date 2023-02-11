@@ -11,7 +11,7 @@ const RichEditor = dynamic(import('react-quill'), {
 
 
 
-const BlogForm = ({mode, categories, users, initialValues}) => {
+const BlogForm = ({mode, categories, users,blog, initialValues}) => {
     const [title, setTitle] = useState(initialValues.title || '');
     const [content, setContent] = useState(initialValues.content || '');
     const [slug, setSlug] = useState(initialValues.slug || '');
@@ -23,18 +23,13 @@ const BlogForm = ({mode, categories, users, initialValues}) => {
    
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let url = '';
-    let method = '';
+    // let url = '';
+    // let method = '';
     if (mode === 'add') {
-      url = '/api/addApi?collection=blogs';
-      method = 'POST';
-    } else if (mode === 'update') {
-      url = '/api/updateBlog';
-      method = 'POST';
-    }
-
-    const res = await fetch(url, {
-        method,
+      // url = '/api/addApi?collection=blogs';
+      // method = 'POST';
+      const res = await fetch('/api/addApi?collection=blogs', {
+        method : 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -50,9 +45,90 @@ const BlogForm = ({mode, categories, users, initialValues}) => {
     });
     if (res.ok) {
       
-        Router.push('/admin');
+      Router.push('/admin/pages/blogs');
     }
+    } else if (mode === 'update') {
+      // url = `/api/updateBlog/`;
+      // method = 'POST';
+      const res = await fetch(`/api/updateBlog/`, {
+        method : 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+           _id: blog._id,
+            title: title,
+            slug: slug,
+            content: content,
+            metaContent: metaContent,
+            category: category,
+            user: user,
+            img: img,
+        })
+    });
+    if (res.ok) {
+      
+      Router.push('/admin/pages/blogs');
+    }
+    }
+
+    // const res = await fetch(url, {
+    //     method,
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //        _id: blog._id,
+    //         title: title,
+    //         slug: slug,
+    //         content: content,
+    //         metaContent: metaContent,
+    //         category: category,
+    //         user: user,
+    //         img: img,
+    //     })
+    // });
+    // if (res.ok) {
+      
+    //   Router.push('/admin/pages/blogs');
+    // }
   };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   let url = '';
+  //   let method = '';
+  //   if (mode === 'add') {
+  //     url = '/api/addApi?collection=blogs';
+  //     method = 'POST';
+  //   } else if (mode === 'update') {
+  //     url = `/api/updateBlog/`;
+  //     method = 'POST';
+  //   }
+  
+  //   const requestBody = {
+  //     title: title,
+  //     slug: slug,
+  //     content: content,
+  //     metaContent: metaContent,
+  //     category: category,
+  //     user: user,
+  //     img: img,
+  //   };
+  
+  //   if (mode === 'update') {
+  //     requestBody._id = blog._id;
+  //   }
+  
+  //   const res = await fetch(url, {
+  //     method,
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(requestBody)
+  //   });
+  // }
+  
+  // console.log(title)
   // const handleFileChange = (e) => {
   //   setImg(e.target.files[0]);
   // };

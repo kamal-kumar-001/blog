@@ -1,6 +1,5 @@
 import User from '../../../../models/User';
 import Category from '../../../../models/Category';
-import mongoose from 'mongoose'
 import WithAuth from '../../withAuth';
 import BlogForm from "../../components/BlogForm";
 import connectDb from '../../../../middleware/mongoose';

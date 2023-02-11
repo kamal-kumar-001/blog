@@ -11,7 +11,7 @@ import BlogForm from '../components/BlogForm';
 const UpdateBlog = ({ blog, categories, users }) => {
 
   return <BlogForm initialValues={{title: blog.title, content: blog.content, slug: blog.slug, img: blog.img, category: blog.category, user: blog.user, metaContent: blog.metaContent}} 
-  mode="update" categories={categories} users={users}/>;
+  mode="update" blog={blog} categories={categories} users={users}/>;
 };
 
 export async function getServerSideProps({ query }) {

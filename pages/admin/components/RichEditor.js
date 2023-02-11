@@ -1,32 +1,33 @@
 import 'react-quill/dist/quill.snow.css'
 import dynamic from 'next/dynamic'
 
-const QuillNoSSRWrapper = dynamic(import('react-quill'), {	
+const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
     loading: () => <p>Loading ...</p>,
-    })
+})
 
 
+export default function RichEditor({content, setContent}) {
     const modules = {
         toolbar: [
-          [{ header: '1' }, { header: '2' }, { font: [] }],
-          [{ size: [] }],
-          ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-          [
-            { list: 'ordered' },
-            { list: 'bullet' },
-            { indent: '-1' },
-            { indent: '+1' },
-          ],
-          ['link', 'image', 'video'],
-          ['clean'],
+            [{ header: '1' }, { header: '2' }, { font: [] }],
+            [{ size: [] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [
+                { list: 'ordered' },
+                { list: 'bullet' },
+                { indent: '-1' },
+                { indent: '+1' },
+            ],
+            ['link', 'image', 'video'],
+            ['clean'],
         ],
         clipboard: {
-          // toggle to add extra line breaks when pasting HTML:
-          matchVisual: false,
+            // toggle to add extra line breaks when pasting HTML:
+            matchVisual: false,
         },
-      }
-      const formats = [
+    }
+    const formats = [
         'header',
         'font',
         'size',
@@ -41,9 +42,12 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
         'link',
         'image',
         'video',
-      ]
-      
-      export default function RichEditor() {
-        return <QuillNoSSRWrapper className=' h-96' modules={modules} formats={formats} theme="snow" />
-      }
-   
+    ]
+    return <QuillNoSSRWrapper
+        className=' h-96'
+        modules={modules} formats={formats} theme="snow"
+        id="content"
+        value={content}
+        onChange={setContent}
+         />
+}

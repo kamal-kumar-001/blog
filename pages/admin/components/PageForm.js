@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
-import 'react-quill/dist/quill.snow.css'
-import dynamic from 'next/dynamic'
-
-const RichEditor = dynamic(import('react-quill'), {	
-    ssr: false,
-    loading: () => <p>Loading ...</p>,
-    })
-
-
+import RichEditor from './RichEditor';
 
 const PageForm = ({mode, categories, users, initialValues}) => {
     const [title, setTitle] = useState(initialValues.title || '');
@@ -50,45 +42,6 @@ const PageForm = ({mode, categories, users, initialValues}) => {
   // const handleFileChange = (e) => {
   //   setImg(e.target.files[0]);
   // };
-  const modules = {
-    toolbar: [
-      [{ header: '1' }, { header: '2' }, { font: [] }],
-      [{ size: [] }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [
-        { list: 'ordered' },
-        { list: 'bullet' },
-        { indent: '-1' },
-        { indent: '+1' },
-      ],
-      ['link', 'image', 'video'],
-      ['clean'],
-    ],
-    clipboard: {
-      // toggle to add extra line breaks when pasting HTML:
-      matchVisual: false,
-    },
-  }
-  /*
-   * Quill editor formats
-   * See https://quilljs.com/docs/formats/
-   */
-  const formats = [
-    'header',
-    'font',
-    'size',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'blockquote',
-    'list',
-    'bullet',
-    'indent',
-    'link',
-    'image',
-    'video',
-  ]
     return (
         <form className='p-5' onSubmit={handleSubmit}>
         <div className="flex gap-5 justify-between items-center">
@@ -157,14 +110,7 @@ const PageForm = ({mode, categories, users, initialValues}) => {
           >
             Content
           </label>
-          <RichEditor 
-          className=' h-96'
-           modules={modules} formats={formats} theme="snow"
-          id="content"
-          value={content}
-          onChange={setContent}
-          required
-          />
+          <RichEditor content={content} setContent={setContent} />
         </div>
       </form>
     );

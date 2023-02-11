@@ -22,7 +22,9 @@ const Login = () => {
       const data = await res.json();
       localStorage.setItem('token', data.token);
       localStorage.setItem('tokenExpiry', Date.now() + 24 * 60 * 60 * 1000);
-      Router.push('/admin');
+      // Router.push('/admin');
+      // const pathname = '/admin';
+      Router.reload(window.location.pathname)
     } catch (err) {
       setError(err.statusText);
     }
@@ -62,7 +64,6 @@ const Login = () => {
       </div>
     </div>
   </div>
-
     </form>
     </>
   );

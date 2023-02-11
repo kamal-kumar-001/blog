@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import Layout from '../../components/AdminLayout';
 import Router from 'next/router';
 import WithAuth from '../../withAuth';
 import Link from 'next/link';
