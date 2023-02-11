@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { useState, useEffect } from 'react'
+import React  from 'react'
 import Blog from '../../models/Blog'
 import User from '../../models/User'
 import Category from '../../models/Category'
@@ -15,11 +15,9 @@ import Image from "next/image";
 import { NextSeo } from "next-seo";
 // import Pagination from '../../components/Pagination';
 
-const Post = ({ blogs, author, category, page, pageCount }) => {
+const Post = ({ post, author, category, page, pageCount }) => {
   const router = useRouter()
   const { slug } = router.query
-
-  const [post, setPost] = useState(null)
 
     // const [currentPage, setCurrentPage] = useState(1);
     // const [postsPerPage] = useState(1);
@@ -37,9 +35,6 @@ const Post = ({ blogs, author, category, page, pageCount }) => {
     //   router.push(`/post/[slug]?page=${page}`, `/post/${router.query.slug}?page=${page}`, { shallow: true });
     // };
 
-  useEffect(() => {
-    setPost(blogs)
-  }, [blogs])
   function createMarkup(c) {
     return { __html: c };
   }
@@ -167,7 +162,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      blogs: JSON.parse(JSON.stringify(blog)),
+      post: JSON.parse(JSON.stringify(blog)),
       author: JSON.parse(JSON.stringify(user)),
       category: JSON.parse(JSON.stringify(category)),
       // page: page,

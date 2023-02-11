@@ -1,6 +1,6 @@
 import 'react-quill/dist/quill.snow.css'
 import dynamic from 'next/dynamic'
-
+// import QuillNoSSRWrapper from 'react-quill'
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
     loading: () => <p>Loading ...</p>,
@@ -44,7 +44,7 @@ export default function RichEditor({content, setContent}) {
         'video',
     ]
     return <QuillNoSSRWrapper
-        className=' h-96'
+        className='h-96'
         modules={modules} formats={formats} theme="snow"
         id="content"
         value={content}

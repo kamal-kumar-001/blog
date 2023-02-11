@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Login from './components/login'
+import Login from '../../adminComponents/login'
 
 const WithAuth = (Component) => {
     return (props) => {

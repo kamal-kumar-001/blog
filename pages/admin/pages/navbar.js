@@ -1,4 +1,4 @@
-import Layout from '../components/AdminLayout';
+import Layout from '../../../adminComponents/AdminLayout';
 import Link from 'next/link';
 import React, {useState, useEffect} from 'react';
 import NavItem from '../../../models/NavItem';

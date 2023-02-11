@@ -7,7 +7,7 @@ import User from '../../../models/User';
 import WithAuth from '../withAuth';
 // import Layout from '../components/AdminLayout';
 // import Link from "next/link";
-import BlogForm from '../components/BlogForm';
+import BlogForm from '../../../adminComponents/BlogForm';
 const UpdateBlog = ({ blog, categories, users }) => {
 
   return <BlogForm initialValues={{title: blog.title, content: blog.content, slug: blog.slug, img: blog.img, category: blog.category, user: blog.user, metaContent: blog.metaContent}} 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Layout from '../components/AdminLayout';
+import Layout from '../../../adminComponents/AdminLayout';
 import WithAuth from '../withAuth';
 import connectDb from '../../../middleware/mongoose';
 import Contact from '../../../models/Contact';

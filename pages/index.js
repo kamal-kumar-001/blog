@@ -72,7 +72,7 @@ const Home = ({ categories, blogs, page, pageCount }) => {
             <BlogList blogs={blogs} author={author} aspect="landscape"/>
             </div> */}
 
-        <div className="grid gap-10 mt-10 lg:gap-10 md:grid-cols-2 xl:grid-cols-3 ">
+        <div className="grid gap-10 mt-10 lg:gap-10 md:grid-cols-2 lg:grid-cols-3 ">
           <BlogList blogs={blogs} aspect="landscape" />
         </div>
         {/* <Pagination page={page} pageCount={pageCount} /> */}

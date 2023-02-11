@@ -1,4 +1,4 @@
-import PageForm from '../../components/PageForm';
+import PageForm from '../../../../adminComponents/PageForm';
 import WithAuth from '../../withAuth';
  const AdminAddPage = () => {
           return(

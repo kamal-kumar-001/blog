@@ -3,45 +3,53 @@ import Router from 'next/router';
 import Link from 'next/link';
 import RichEditor from './RichEditor';
 
-const PageForm = ({mode, categories, users, initialValues}) => {
+const PageForm = ({mode, page, initialValues}) => {
     const [title, setTitle] = useState(initialValues.title || '');
     const [content, setContent] = useState(initialValues.content || '');
     const [slug, setSlug] = useState(initialValues.slug || '');
     const [desc, setDesc] = useState(initialValues.desc || '');
   
    
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let url = '';
-    let method = '';
-    if (mode === 'add') {
-      url = '/api/addApi?collection=pages';
-      method = 'POST';
-    } else if (mode === 'update') {
-      url = '/api/updatePage';
-      method = 'POST';
-    }
-
-    const res = await fetch(url, {
-        method,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            title: title,
-            slug: slug,
-            content: content,
-            desc: desc,
-        })
-    });
-    if (res.ok) {
-      
-        Router.push('/admin');
-    }
-  };
-  // const handleFileChange = (e) => {
-  //   setImg(e.target.files[0]);
-  // };
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      if (mode === 'add') {
+        const res = await fetch('/api/addApi?collection=pages', {
+          method : 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              title: title,
+              slug: slug,
+              content: content,
+              desc: desc,
+          })
+      });
+      if (res.ok) {
+        
+        Router.push('/admin/pages/pages');
+      }
+      } else if (mode === 'update') {
+        const res = await fetch(`/api/updateApi?collection=pages`, {
+          method : 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+             _id: page._id,
+             title: title,
+             slug: slug,
+             content: content,
+             desc: desc,
+          })
+      });
+      if (res.ok) {
+        
+        Router.push('/admin/pages/pages');
+      }
+      }
+  
+    };
     return (
         <form className='p-5' onSubmit={handleSubmit}>
         <div className="flex gap-5 justify-between items-center">

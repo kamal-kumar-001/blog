@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
-import 'react-quill/dist/quill.snow.css'
-import dynamic from 'next/dynamic'
-
-const RichEditor = dynamic(import('react-quill'), {	
-    ssr: false,
-    loading: () => <p>Loading ...</p>,
-    })
-
-
+import RichEditor from './RichEditor';
 
 const BlogForm = ({mode, categories, users,blog, initialValues}) => {
     const [title, setTitle] = useState(initialValues.title || '');
@@ -20,14 +12,9 @@ const BlogForm = ({mode, categories, users,blog, initialValues}) => {
     const [user, setUser] = useState(initialValues.user || '');
     const [metaContent, setMetaContent] = useState(initialValues.metaContent || '');
   
-   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // let url = '';
-    // let method = '';
     if (mode === 'add') {
-      // url = '/api/addApi?collection=blogs';
-      // method = 'POST';
       const res = await fetch('/api/addApi?collection=blogs', {
         method : 'POST',
         headers: {
@@ -48,8 +35,6 @@ const BlogForm = ({mode, categories, users,blog, initialValues}) => {
       Router.push('/admin/pages/blogs');
     }
     } else if (mode === 'update') {
-      // url = `/api/updateBlog/`;
-      // method = 'POST';
       const res = await fetch(`/api/updateBlog/`, {
         method : 'POST',
         headers: {
@@ -72,105 +57,7 @@ const BlogForm = ({mode, categories, users,blog, initialValues}) => {
     }
     }
 
-    // const res = await fetch(url, {
-    //     method,
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //        _id: blog._id,
-    //         title: title,
-    //         slug: slug,
-    //         content: content,
-    //         metaContent: metaContent,
-    //         category: category,
-    //         user: user,
-    //         img: img,
-    //     })
-    // });
-    // if (res.ok) {
-      
-    //   Router.push('/admin/pages/blogs');
-    // }
   };
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   let url = '';
-  //   let method = '';
-  //   if (mode === 'add') {
-  //     url = '/api/addApi?collection=blogs';
-  //     method = 'POST';
-  //   } else if (mode === 'update') {
-  //     url = `/api/updateBlog/`;
-  //     method = 'POST';
-  //   }
-  
-  //   const requestBody = {
-  //     title: title,
-  //     slug: slug,
-  //     content: content,
-  //     metaContent: metaContent,
-  //     category: category,
-  //     user: user,
-  //     img: img,
-  //   };
-  
-  //   if (mode === 'update') {
-  //     requestBody._id = blog._id;
-  //   }
-  
-  //   const res = await fetch(url, {
-  //     method,
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(requestBody)
-  //   });
-  // }
-  
-  // console.log(title)
-  // const handleFileChange = (e) => {
-  //   setImg(e.target.files[0]);
-  // };
-  const modules = {
-    toolbar: [
-      [{ header: '1' }, { header: '2' }, { font: [] }],
-      [{ size: [] }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [
-        { list: 'ordered' },
-        { list: 'bullet' },
-        { indent: '-1' },
-        { indent: '+1' },
-      ],
-      ['link', 'image', 'video'],
-      ['clean'],
-    ],
-    clipboard: {
-      // toggle to add extra line breaks when pasting HTML:
-      matchVisual: false,
-    },
-  }
-  /*
-   * Quill editor formats
-   * See https://quilljs.com/docs/formats/
-   */
-  const formats = [
-    'header',
-    'font',
-    'size',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'blockquote',
-    'list',
-    'bullet',
-    'indent',
-    'link',
-    'image',
-    'video',
-  ]
     return (
         <form className='p-5' onSubmit={handleSubmit}>
         <div className="flex gap-5 justify-between items-center">
@@ -286,7 +173,7 @@ const BlogForm = ({mode, categories, users,blog, initialValues}) => {
             onChange={(e) => setContent(e.target.value)}
             required
           /> */}
-          <RichEditor 
+          {/* <RichEditor 
           className=' h-96'
            modules={modules} formats={formats} theme="snow"
           id="content"
@@ -294,7 +181,8 @@ const BlogForm = ({mode, categories, users,blog, initialValues}) => {
           onChange={setContent}
           // onChange={(e) => setContent(e.target.value)}
           required
-          />
+          /> */}
+          <RichEditor content={content} setContent={setContent} />
         </div>
       </form>
     );

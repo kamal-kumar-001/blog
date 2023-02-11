@@ -16,7 +16,7 @@ const Categories = ({ categories, blogs}) => {
   return <Layout>
     <Tabs categories={categories} />
     <Container>
-    <div className="grid gap-10 mt-10 lg:gap-10 md:grid-cols-2 xl:grid-cols-3 ">
+    <div className="grid gap-10 mt-10 lg:gap-10 md:grid-cols-2 lg:grid-cols-3 ">
             <BlogList blogs={filteredBlogs} aspect="landscape" />
             </div>
             </Container>

@@ -48,7 +48,9 @@ const BlogList = ({ blogs, aspect }) => {
               </span>
             </Link>
           </h2>
+          <Link href={`/blog/${blog.slug}`}>
               <p className="leading-relaxed mb-3" >{blog.metaContent}</p>
+              </Link>
 
           <div className="hidden">
             <p className="mt-2 text-sm text-gray-500 dark:text-gray-300  line-clamp-3">
