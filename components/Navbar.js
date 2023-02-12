@@ -21,7 +21,7 @@ export default function Navbar({ navItems }) {
         <div className="flex flex-col md:flex-row md:justify-between md:items-center">
           <div className="flex md:flex-1 justify-between items-center">
             <div className="flex  items-center">
-              <Link className=" text-xl font-bold md:text-2xl hover:text-gray-700" href="/">Brand</Link>
+              <Link className=" text-xl font-bold md:text-2xl hover:text-gray-700" href="/">Blog</Link>
             </div>
 
             <div className="flex md:hidden">
