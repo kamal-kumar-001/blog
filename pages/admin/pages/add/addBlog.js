@@ -1,7 +1,7 @@
 import User from '../../../../models/User';
 import Category from '../../../../models/Category';
 import WithAuth from '../../withAuth';
-import BlogForm from "../../../../adminComponents/BlogForm";
+import BlogForm from "../../../../components/adminComponents/BlogForm";
 import connectDb from '../../../../middleware/mongoose';
 
 

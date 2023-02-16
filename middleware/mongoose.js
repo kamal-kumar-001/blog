@@ -5,6 +5,7 @@ const connectDb = handler => async (req, res)=>{
         return handler(req, res)
     }
     await mongoose.connect(process.env.MONGO_URL)
+    // await mongoose.connect("mongodb://kamal:%40mongod8@ac-bhaee3p-shard-00-00.qhpam01.mongodb.net:27017,ac-bhaee3p-shard-00-01.qhpam01.mongodb.net:27017,ac-bhaee3p-shard-00-02.qhpam01.mongodb.net:27017/test?replicaSet=atlas-q931k6-shard-0&ssl=true&authSource=admin")
     return handler(req, res);
 }
 export default connectDb; 

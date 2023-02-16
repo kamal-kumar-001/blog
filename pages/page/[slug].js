@@ -1,8 +1,8 @@
 import React  from 'react'
-import Container from "../components/container";
-import Layout from "../components/Layout";
-import Page from '../models/Page';
-import connectDb from '../middleware/mongoose';
+import Container from "../../components/container";
+import Layout from "../../components/Layout";
+import Page from '../../models/Page';
+import connectDb from '../../middleware/mongoose';
 import { useRouter } from 'next/router'
 
 const DefaultPage = ({page}) => {

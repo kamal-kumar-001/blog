@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import Layout from '../../../adminComponents/AdminLayout';
+import Layout from '../../../components/adminComponents/AdminLayout';
 import WithAuth from '../withAuth';
 import Email from '../../../models/Email';
 import connectDb from '../../../middleware/mongoose';
 import Link from 'next/link';
+import RichEditor from '../../../components/adminComponents/RichEditor';
 
 const SendEmailToAll = ({email}) => {
   const [emailSubject, setEmailSubject] = useState('');
@@ -30,23 +31,7 @@ const SendEmailToAll = ({email}) => {
 
   return (
     <Layout>
-  <form onSubmit={handleSubmit} className="flex flex-col">
-  {message && <p className='text-green-500'>{message}</p>}
-  <label htmlFor="subject">Subject:</label>
-    <input type="text" id="subject"
-            value={emailSubject}
-            required
-            onChange={e => setEmailSubject(e.target.value)} className="w-full px-3 py-2 mb-4 border border-gray-400 rounded-lg"  />
-    <label htmlFor="body">Body:</label>
-    <textarea type="text" id="body"
-            value={emailBody}
-            rows="5"
-            required
-            onChange={e => setEmailBody(e.target.value)}
-             className="w-full px-3 py-2 mb-4 border border-gray-400 rounded-lg"  />
-    <button type="submit" className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">Send</button>
-  </form>
-  <table className="table-auto w-full mt-4">
+       {/* <table className="table-auto w-full mt-4">
           <thead>
             <tr>
               <th className="px-4 py-2">Name</th>
@@ -85,7 +70,41 @@ const SendEmailToAll = ({email}) => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
+  <form onSubmit={handleSubmit} className="flex flex-col">
+  {message && <p className='text-green-500'>{message}</p>}
+  <div className="flex gap-5 justify-between">
+      <h1 className="text-2xl flex-1  font-bold mb-4">Send Newsletter</h1>
+      {/* <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
+        >
+           <Link href={"/admin"}>Cancel</Link>
+        </button> */}
+      <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
+          type="submit"
+        >
+          Send
+        </button>
+        </div>
+  <label htmlFor="subject">Subject:</label>
+    <input type="text" id="subject"
+            value={emailSubject}
+            required
+            onChange={e => setEmailSubject(e.target.value)} className="w-full px-3 py-2 mb-4 border border-gray-400 rounded-lg"  />
+    <label htmlFor="body">Body:</label>
+             <RichEditor content={emailBody} setContent={setEmailBody}/>
+    {/* <label htmlFor="body">Html Body:</label>
+    <textarea type="text" id="body"
+            value={emailBody}
+            rows="5"
+            required
+            onChange={e => setEmailBody(e.target.value)}
+             className="w-full px-3 py-2 mb-4 border border-gray-400 rounded-lg"  
+             /> */}
+    {/* <button type="submit" className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">Send</button> */}
+  </form>
+ 
     </Layout>
   );
 };

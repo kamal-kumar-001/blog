@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import Layout from '../../../adminComponents/AdminLayout';
+import Layout from '../../../components/adminComponents/AdminLayout';
 import WithAuth from '../withAuth';
 import connectDb from '../../../middleware/mongoose';
 import Contact from '../../../models/Contact';
+import RichEditor from '../../../components/adminComponents/RichEditor';
 
 const ReplyToContact = ({contact}) => {
     const [emailSubject, setEmailSubject] = useState('');
@@ -35,6 +36,12 @@ const ReplyToContact = ({contact}) => {
         <Layout>
             <form onSubmit={handleSubmit} className="flex flex-col">
                 {message && <p>{message}</p>}
+                <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
+          type="submit"
+        >
+          Send
+        </button>
                 <label htmlFor="subject">To</label>
                 <input type="text" id="subject"
                     value={to}
@@ -46,13 +53,14 @@ const ReplyToContact = ({contact}) => {
                     required
                     onChange={(e) => setEmailSubject(e.target.value)} className="w-full px-3 py-2 mb-4 border border-gray-400 rounded-lg" />
                 <label htmlFor="body">Body:</label>
-                <textarea type="text" id="body"
+                {/* <textarea type="text" id="body"
                     value={emailBody}
                     rows="5"
                     required
                     onChange={(e) => setEmailBody(e.target.value)}
-                    className="w-full px-3 py-2 mb-4 border border-gray-400 rounded-lg" />
-                <button type="submit" className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">Send</button>
+                    className="w-full px-3 py-2 mb-4 border border-gray-400 rounded-lg" /> */}
+                    <RichEditor content={emailBody} setContent={setEmailBody} />
+                {/* <button type="submit" className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">Send</button> */}
             </form>
         </Layout>
     );

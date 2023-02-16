@@ -83,11 +83,15 @@ const Home = ({ categories, blogs, page, pageCount }) => {
 
 
 export async function getServerSideProps(context) {
-  await connectDb();
+  // await connectDb();
+
   
-  let categories = await Category.find().sort({createdAt: -1});
-  let page = context.query.page ? parseInt(context.query.page) : 1;
-  let blogs = await Blog.find().populate('user').populate('category').sort({createdAt: -1});
+  // let categories = await Category.find().sort({createdAt: -1});
+  const res = await fetch('http://localhost:3000/api/getBlog');
+  const data = await res.json();
+  // const res = await fetch('http://localhost:3000/api/getCategory');
+  // let blogs = await Blog.find().populate('user').populate('category').sort({createdAt: -1});
+  // let page = context.query.page ? parseInt(context.query.page) : 1;
   // let blogs = await Blog.find().populate('user').populate('category').sort({createdAt: -1}).skip((page - 1) * 10).limit(10);
   // let totalPosts = await Blog.countDocuments();
   
@@ -95,9 +99,10 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      blogs: JSON.parse(JSON.stringify(blogs)),
-      categories: JSON.parse(JSON.stringify(categories)),
-      //   author: JSON.parse(JSON.stringify(user)), 
+      // blogs: JSON.parse(JSON.stringify(blogs)),
+      blogs: data.getBlogs,
+      categories: data.categories
+      // categories: JSON.parse(JSON.stringify(categories)),
       // pageCount: Math.ceil(totalPosts / 10),
       // page: page,
     },

@@ -40,12 +40,16 @@ const Login = () => {
     .main-nav{
       display: none;
     }
+    .login-div{
+      width: 40%;
+
+    }
     `}
     </style>
     <form onSubmit={handleSubmit}>
-  <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
+  <div className="p-10 mx-auto login-div">
     <h1 className="font-bold text-center text-2xl mb-5">Admin</h1>  
-    <div className=" shadow w-full rounded-lg divide-y">
+    <div className=" shadow  rounded-lg divide-y">
       <div className="px-5 py-7">
         <label className="font-semibold text-sm  pb-1 block">E-mail</label>
         <input type="text" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" id="email"

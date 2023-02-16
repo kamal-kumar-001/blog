@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ThemeSwitch from "./themeSwitch";
+// import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function Navbar({ navItems }) {
 
@@ -13,6 +14,16 @@ export default function Navbar({ navItems }) {
   const handleDrop = () => {
     setDropClick(!dropClick)
   }
+
+  // const { data: session } = useSession()
+  // if (session) {
+  //   return (
+  //     <>
+  //       Signed in as {session.user.email} <br />
+  //       <button onClick={() => signOut()}>Sign out</button>
+  //     </>
+  //   )
+  // }
 
   return (
     <header className="bg-white dark:bg-black sticky  z-20 top-0">
@@ -86,11 +97,13 @@ export default function Navbar({ navItems }) {
               </Link>
               {/* ))} */}
             </div>
-            {/* 
+            
         <div className="flex items-center py-2 -mx-1 md:mx-0">
-          <a className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm bg-gray-500 font-medium text-white leading-5 hover:bg-blue-600 md:mx-2 md:w-auto" href="#">Login</a>
-          <a className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm bg-blue-500 font-medium text-white leading-5 hover:bg-blue-600 md:mx-0 md:w-auto" href="#">Join free</a>
-        </div> */}
+        {/* <button className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm bg-gray-500 font-medium text-white leading-5 hover:bg-blue-600 md:mx-2 md:w-auto" onClick={() => signIn()}>Login</button> */}
+        {/* <button className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm bg-gray-500 font-medium text-white leading-5 hover:bg-blue-600 md:mx-2 md:w-auto" onClick={() => signUp()}>Sign Up</button> */}
+          {/* <a className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm bg-gray-500 font-medium text-white leading-5 hover:bg-blue-600 md:mx-2 md:w-auto" href="#">Login</a> */}
+          {/* <a className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm bg-blue-500 font-medium text-white leading-5 hover:bg-blue-600 md:mx-0 md:w-auto" href="#">Join free</a> */}
+        </div>
 
             {/* <div className="mt-3 md:hidden">
           <input type="text" className="w-full px-4 py-3 leading-tight text-sm text-gray-700 bg-gray-100 rounded-md placeholder-gray-500 focus:outline-none focus:bg-white focus:shadow-outline" placeholder="Search" aria-label="Search" />

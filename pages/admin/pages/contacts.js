@@ -1,4 +1,4 @@
-import Layout from '../../../adminComponents/AdminLayout';
+import Layout from '../../../components/adminComponents/AdminLayout';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import Contact from '../../../models/Contact';

@@ -1,4 +1,4 @@
-import Layout from '../../adminComponents/AdminLayout';
+import Layout from '../../components/adminComponents/AdminLayout';
 import Link from 'next/link';
 import React, {useState, useEffect} from 'react';
 import Blog from '../../models/Blog';

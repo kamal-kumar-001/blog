@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 // import Head from 'next/head';
 import Link from 'next/link';
-import ThemeSwitch from '../components/themeSwitch';
-import WithAuth from '../pages/admin/withAuth';
+import ThemeSwitch from '../themeSwitch';
+// import WithAuth from '../pages/admin/withAuth';
 
 const Layout = ({ children }) => {
 //   const [click, setClick] = useState(false);
@@ -17,9 +17,6 @@ const Layout = ({ children }) => {
       }
       .main-nav{
         display: none;
-      }
-      .admin-nav-item{
-        padding: 0 30px;
       }
       `}
       </style>
@@ -37,7 +34,7 @@ const Layout = ({ children }) => {
               </div>
             </div>
             
-            <div className="px-10 admin-nav-item ">
+            <div className=" ">
               <div className="w-full block flex-grow  lg:items-center lg:w-auto">
                 <div className="px-10  ml-5  flex  flex-col  lg:flex-grow">
                   <Link href="/" target={"blank"} className=" mt-4 ">
@@ -85,4 +82,5 @@ const Layout = ({ children }) => {
   );
 };
 
-export default WithAuth(Layout);
+export default Layout;
+// export default WithAuth(Layout);

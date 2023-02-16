@@ -4,7 +4,7 @@ import Page from '../../../models/Page';
 import connectDb from '../../../middleware/mongoose';
 import WithAuth from '../withAuth';
 
-import PageForm from '../../../adminComponents/PageForm';
+import PageForm from '../../../components/adminComponents/PageForm';
 const UpdatePage = ({ page }) => {
 
   return <PageForm initialValues={{title: page.title, content: page.content, slug: page.slug, desc: page.desc,  }} 
