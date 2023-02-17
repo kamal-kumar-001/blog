@@ -5,7 +5,7 @@ import React from 'react'
     
     return (
       <div className={`fixed z-50 top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center ${modalClass}`}>
-      <div className="bg-white rounded-lg shadow-md p-4">
+      <div className="bg-white dark:bg-black rounded-lg shadow-md p-4">
         <p>Are you sure you want to delete this item?</p>
         <div className="mt-4 flex justify-end">
               <button className="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-full mr-2" onClick={onClose}>Cancel</button>

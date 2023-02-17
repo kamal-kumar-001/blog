@@ -48,7 +48,8 @@ const handler = async (req, res) => {
           createdDoc = await new Product({ title: req.body.title, slug: req.body.slug, content: req.body.content, img: req.body.img, price: req.body.price, }).save();
           break;
         case 'navItems':
-          createdDoc = await new NavItem({ position: req.body.position, name: req.body.name, slug: req.body.slug, }).save();
+          createdDoc = await new NavItem({ position: req.body.position, name: req.body.name, slug: req.body.slug, subnavItems: req.body.subnavItems,}).save();
+          // console.log(req.body.subnavItems)
           break;
         default:
           return res.status(400).json({ message: 'Invalid collection name' });

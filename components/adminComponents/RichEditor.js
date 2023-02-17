@@ -94,7 +94,7 @@ export default function RichEditor({content, setContent}) {
       )}
       {isHTMLMode && (
         <textarea
-          className="h-full w-full bg-white p-2 border border-gray-300 rounded-md"
+          className="h-full w-full  p-2 border border-gray-300 rounded-md"
           value={content}
           onChange={(e) => setContent(e.target.value)}
         ></textarea>

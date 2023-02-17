@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ThemeSwitch from "./themeSwitch";
+import {BiChevronDown,BiMenu} from 'react-icons/bi'
 // import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function Navbar({ navItems }) {
@@ -37,9 +38,7 @@ export default function Navbar({ navItems }) {
 
             <div className="flex md:hidden">
               <button onClick={handleClick} type="button" className="  focus:outline-none " aria-label="toggle menu">
-                <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current">
-                  <path fillRule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
-                </svg>
+                <BiMenu size={30}/>
               </button>
             </div>
           </div>
@@ -55,7 +54,7 @@ export default function Navbar({ navItems }) {
               <div onClick={handleDrop} className="cursor-pointer ">
                 <div className="hover:text-blue-500 flex justify-between px-5 md:py-3 font-medium   items-center  space-x-2">
                   <span>Service</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 fill-current pt-1" viewBox="0 0 24 24"><path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z" /></svg>
+                  <BiChevronDown size={24}/>
                 </div>
                 <ul className={!dropClick ? "opacity-0 h-0 -translate-y-4 overflow-hidden  transition md:absolute  duration-300    md:shadow-lg md:rounded-b bg-white dark:bg-black" : "bg-white dark:bg-black opacity-1 h-auto  translate-y-0   transition md:absolute  duration-300   md:shadow-lg md:rounded-b "} >
                   <li>
@@ -115,3 +114,63 @@ export default function Navbar({ navItems }) {
     </header>
   );
 }
+
+// import React from 'react'
+
+// const Navbar = ({navItems}) => {
+//   let dropdownItems = [];
+//   return (
+//     <div className="navbar">
+//       {navItems.map((item, index) => {
+//         if (item.name.startsWith('--')) {
+//           // This is a dropdown item
+//           dropdownItems.push(item);
+//           return null;
+//         }
+
+//         const isFirstItem = dropdownItems.length === 0;
+
+//         const renderedItem = (
+//           <Link key={item.slug} href={item.slug}>
+//             <span className="nav-link">{item.name}</span>
+//           </Link>
+//         );
+
+//         if (isFirstItem) {
+//           // This item is the first after a dropdown, so it's the dropdown trigger
+//           const dropdownMenu = (
+//             <div className="dropdown-menu">
+//               {dropdownItems.map((dropdownItem, dropdownIndex) => (
+//                 <Link key={dropdownItem.slug} href={dropdownItem.slug}>
+//                   <span className="dropdown-link">{dropdownItem.name.slice(2)}</span>
+//                 </Link>
+//               ))}
+//             </div>
+//           );
+
+//           dropdownItems = [];
+//           return (
+//             <div key={item.slug} className="dropdown">
+//               {renderedItem}
+//               {dropdownMenu}
+//             </div>
+//           );
+//         }
+
+//         return renderedItem;
+//       })}
+//     </div>
+//   )
+// }
+// export async function getStaticProps() {
+//   // Fetch the navigation menu data from the API endpoint
+//   const res = await fetch('http://localhost:3000/api/getApi');
+//   const navItems = await res.json();
+//   console.log(navItems);
+//   // Pass the navigation menu data as a prop to the page component
+//   return {
+//     props: { navItems },
+//   };
+// }
+
+// export default Navbar
