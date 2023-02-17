@@ -6,8 +6,8 @@ import Router from 'next/router';
 import connectDb from '../../../middleware/mongoose';
 
 const NavItems = ({ navItems }) => {
-  const handleDelete = async (collection, id) => {
-    const res = await fetch(`/api/deleteApi?collection=${collection}&id=${id}`, {
+  const handleDelete = async ( id) => {
+    const res = await fetch(`/api/navApi?id=${id}`, {
       method: 'DELETE',
     });
     const data = await res.json();
@@ -59,7 +59,7 @@ const NavItems = ({ navItems }) => {
                   </Link>
                   <button
                     className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-                    onClick={() => handleDelete('navItems', nav._id)}
+                    onClick={() => handleDelete(nav._id)}
                   >
                     Delete
                   </button>

@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
-import WithAuth from '../../withAuth';
+import WithAuth from '../withAuth';
 import Link from 'next/link';
 import axios from 'axios';
+import NavItem from '../../../models/NavItem';
+import connectDb from '../../../middleware/mongoose';
 
-const AdminAddNav = () => {
-  const [position, setPosition] = useState('');
-  const [name, setName] = useState('');
-  const [slug, setSlug] = useState('');
-  const [subitems, setSubitems] = useState([]);
-  const [subitemForms, setSubitemForms] = useState([]);
+const UpdateNav = ({navItem}) => {
+  const [position, setPosition] = useState(navItem.position);
+  const [name, setName] = useState(navItem.name);
+  const [slug, setSlug] = useState(navItem.slug);
+  const [subitems, setSubitems] = useState(navItem.subitems);
+  const length = navItem.subitems.length;
+  // console.log(length);
+  const [subitemForms, setSubitemForms] = useState(Array.from({ length }, () => 1));
+  // const [subitemForms, setSubitemForms] = useState([
+  //   1,1,1,1
+  // ]);
 
   const handleAddSubitemForm = () => {
     const newId = Date.now();
@@ -48,32 +55,13 @@ const handleDeleteSubitemForm = (id) => {
     );
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const res = await fetch('/api/addApi?collection=navItems', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       position: position,
-  //       name: name,
-  //       slug: slug,
-  //       subnavItems: subnavItems
-  //     })
-  //   });
-    
-  //   if (res.ok) {
-  //     Router.push('/admin/pages/navbar');
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newNavItem = {position, name, slug, subitems };
-    console.log(newNavItem);
+    // const newNavItem = {_id: navItem._id,position, name, slug, subitems };
+    // console.log(newNavItem);
     try {
-      const response = await axios.post('/api/navApi', newNavItem);
+      const response = await axios.put(`/api/navApi?id=${navItem._id}`, {_id: navItem._id,position, name, slug, subitems });
       console.log(response.message);
       Router.push('/admin/pages/navbar');
 
@@ -84,7 +72,7 @@ const handleDeleteSubitemForm = (id) => {
 
   return (
     <div className="max-w-3xl mx-auto my-8">
-      <h1 className="text-2xl font-bold mb-4">Add NavItem</h1>
+      <h1 className="text-2xl font-bold mb-4">Update NavItem</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="position" className="block font-medium">
@@ -128,9 +116,48 @@ const handleDeleteSubitemForm = (id) => {
             className="bg-blue-500 text-white py-2 px-4 rounded"
             // onClick={handleAddSubitemForm}
           >
-            Add Nav
+            Update Nav
           </button>
         </div>
+        {/* {subitems.map((subitem, index) => (
+  <div key={index} className="mb-4">
+    <h2 className="font-medium mb-2">Subitem {index + 1}</h2>
+    <div className="mb-2">
+      <label htmlFor={`subitem-name-${index}`} className="block">
+        Name
+      </label>
+      <input
+        type="text"
+        id={`subitem-name-${index}`}
+        value={subitem.name}
+        onChange={(e) => handleSubitemNameChange(index, e.target.value)}
+        className="form-input px-3 py-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+      />
+    </div>
+    <div className="mb-2">
+      <label htmlFor={`subitem-slug-${index}`} className="block">
+        Slug
+      </label>
+      <input
+        type="text"
+        id={`subitem-slug-${index}`}
+        value={subitem.slug}
+        onChange={(e) => handleSubitemSlugChange(index, e.target.value)}
+        className="form-input px-3 py-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+      />
+    </div>
+    <div className="mb-2">
+      <button
+        type="button"
+        className="bg-red-500 text-white py-2 px-4 rounded"
+        onClick={() => handleDeleteSubitemForm(subitem.id)}
+      >
+        Delete Subitem
+      </button>
+    </div>
+  </div>
+))} */}
+
         {subitemForms.map((form, index) => (
   <div key={index} className="mb-4">
     <h2 className="font-medium mb-2">Subitem {index + 1}</h2>
@@ -179,4 +206,15 @@ const handleDeleteSubitemForm = (id) => {
 </div>
   )
 };
-export default WithAuth(AdminAddNav)
+export async function getServerSideProps({ query }) {
+  await connectDb();
+  const navItem = await NavItem.findOne({ _id: query.slug });
+  // console.log(navItem)
+  return {
+    props: {
+      navItem: JSON.parse(JSON.stringify(navItem)),
+    },
+  };
+}
+
+export default WithAuth(UpdateNav)
