@@ -18,13 +18,27 @@ const handler = async (req, res) => {
       //   port: 587,
       //   secure: false, // true for 465, false for other ports
       //   auth: {
+      //     user: "AKIA4E3QV3SIL2RWWXAW",
+      //     pass: "BLrIoXHWdzTa9WIv23biqUW3OFD6N6/bgterKqbmRng9"
+      //   }
+      // host: 'email-smtp.ap-south-1.amazonaws.com',
+      //   port: 587,
+      //   secure: false, // true for 465, false for other ports
+      //   auth: {
+      //     user: "AKIA6Q6GBBB7AU3G36OS",
+      //     pass: "BKJRyDdxnn6bnXuSGiPJNrjMSaagmcJ9xPPpwcoldCNV"
+      //   }
+      // host: 'email-smtp.ap-south-1.amazonaws.com',
+      //   port: 587,
+      //   secure: false, // true for 465, false for other ports
+      //   auth: {
       //     user: "AKIA4E3QV3SIN6JLEOX6",
       //     pass: "BAyDBQOIW3sxS2At3UsdpM5U72k84G7fSwVXf/tHWlQV"
       //   }
     });
     
     let info = await transporter.sendMail({
-      from: '"Fred Foo 👻" noreply@upscprep.com', 
+      from: '"Fred Foo 👻" noreply@forum.upscprep.com', 
       // from: '"Fred Foo 👻" kkhatiwal1@gmail.com', 
       to: req.body.to, // list of receivers
       subject: req.body.emailSubject, // Subject line

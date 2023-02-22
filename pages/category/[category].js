@@ -11,7 +11,9 @@ import Container from '../../components/container';
 const Categories = ({ categories, blogs}) => {
   const router = useRouter()
   const { category } = router.query
-  const filteredBlogs = blogs.filter(blog => blog.category.slug === category)
+  // const filteredBlogs = blogs.filter(blog => blog.category.slug === category)
+  const filteredBlogs = blogs.filter(blog => blog.category && blog.category.slug === category)
+
 
   return <Layout>
     <Tabs categories={categories} />

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ThemeSwitch from "../components/themeSwitch";
 import { BiChevronDown, BiMenu } from 'react-icons/bi';
+import { IoMdClose } from 'react-icons/io';
 
 export default function Navbar({ navItems }) {
   const [click, setClick] = useState(false);
@@ -24,17 +25,14 @@ export default function Navbar({ navItems }) {
             <div className="flex  items-center">
               <Link className=" text-xl font-bold md:text-2xl hover:text-gray-700" href="/">Blog</Link>
             </div>
-
             <div className="flex md:hidden">
               <button onClick={handleClick} type="button" className="  focus:outline-none " aria-label="toggle menu">
-                <BiMenu size={30} />
+                 {!click ? <BiMenu size={30} />: <IoMdClose size={30} />}
               </button>
             </div>
           </div>
-
           <ThemeSwitch />
-
-          <div className={click ? "md:flex items-center block" : "md:flex items-center hidden"}>
+          <div className={click ? "md:flex items-center block" : "md:flex items-center hidden "}>
             <div className="flex flex-col md:items-center mt-2 md:flex-row md:mt-0 md:mx-1 md:space-y-0 space-y-2">
               {navItems.map((item, index) => (
                 <React.Fragment key={index}>

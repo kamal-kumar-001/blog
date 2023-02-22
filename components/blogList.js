@@ -34,11 +34,11 @@ const BlogList = ({ blogs, aspect }) => {
             </Link>
           </div>
           <Link
-            href={`/category/${blog.category.slug}`}
+            href={blog.category ? `/category/${blog.category.slug}` : ""}
            >
               {/* <Label color={category.color}>{category.title}</Label> */}
               <span className="inline-block mt-5 text-xs font-medium tracking-wider uppercase ">
-              {blog.category.name}
+              {blog.category ? blog.category.name : ""}
               </span>
           </Link>
           <h2 className="mt-2 text-lg font-semibold tracking-normal text-brand-primary dark:text-white">
@@ -64,18 +64,19 @@ const BlogList = ({ blogs, aspect }) => {
             <div className="flex items-center gap-3">
               <div className="relative flex-shrink-0 w-5 h-5">
                 <Image
-                  src={blog.user.img}
+                  // src={blog.user.img}
+                  src={blog.user ? blog.user.img : ""}
                   // blurDataURL={AuthorimageProps.blurDataURL}
                   // loader={AuthorimageProps.loader}
                   // objectFit="cover"
-                  alt={blog.user.name}
+                  alt={blog.user ? blog.user.name : ""}
                   // placeholder="blur"
                   className="rounded-full"
                   sizes="(max-width: 640px) 640px, 100vw"
                   fill
                 />
               </div>
-              <span className="text-sm">{blog.user.name}</span>
+              <span className="text-sm">{blog.user ? blog.user.name : ""}</span>
             </div>
             <span className="text-xs text-gray-300 dark:text-gray-600">
               &bull;
