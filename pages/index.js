@@ -87,7 +87,7 @@ export async function getServerSideProps(context) {
 
   
   // let categories = await Category.find().sort({createdAt: -1});
-  const res = await fetch('http://localhost:3000/api/getBlog');
+  const res = await fetch('https://blog-jcxn.vercel.app/api/getBlog');
   const data = await res.json();
   // const res = await fetch('http://localhost:3000/api/getCategory');
   // let blogs = await Blog.find().populate('user').populate('category').sort({createdAt: -1});
