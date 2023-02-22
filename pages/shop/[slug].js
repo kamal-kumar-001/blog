@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import connectDb from '../../middleware/mongoose';
-import Product from '../../models/shop/Product';
+import Product from '../../models/Shop/Product';
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 import Layout from '../../components/Layout';
