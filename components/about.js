@@ -1,9 +1,7 @@
 import React from 'react'
-import Layout from '../components/Layout';
-import Container from '../components/container';
+import Layout from './Layout';
+import Container from './container';
 import Link from 'next/link';
-import User from '../models/User'
-import connectDb from '../middleware/mongoose'
 import Image from "next/image";
 const About = ({authors}) => {
   return (
@@ -56,15 +54,5 @@ const About = ({authors}) => {
     </Layout>
   )
 }
-export async function getServerSideProps(context) {
-    await connectDb();
-    
-      let user = await User.find();
-    
-      return {
-        props: {
-            authors: JSON.parse(JSON.stringify(user)), 
-        },
-      }
-  }
+
 export default About;

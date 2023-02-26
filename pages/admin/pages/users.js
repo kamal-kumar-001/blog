@@ -1,10 +1,8 @@
 import Layout from '../../../components/adminComponents/AdminLayout';
 import Link from 'next/link';
 import React  from 'react';
-import User from '../../../models/User';
 import Router from 'next/router';
 import WithAuth from '../withAuth';
-import connectDb from '../../../middleware/mongoose';
 
 const Admin = ({ users }) => {
   const handleDelete = async (collection, id) => {
@@ -78,15 +76,15 @@ const Admin = ({ users }) => {
   );
 };
 
-export async function getServerSideProps(context){
-    await connectDb();
-    let user = await User.find().sort({createdAt: -1});
-   return {
-      props: {
-          users: JSON.parse(JSON.stringify(user)), 
-      },
-    }
+export async function getServerSideProps(context) {
+  let baseUrl = process.env.URL
+  const res = await fetch(`${baseUrl}/api/getUser`);
+  const data = await res.json();
+  return {
+    props: {
+      users: data.users,
+    },
+  };
 }
-
 export default WithAuth(Admin);
 

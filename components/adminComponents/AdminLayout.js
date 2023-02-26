@@ -55,9 +55,6 @@ const Layout = ({ children }) => {
                   <Link href="/admin/pages/contacts" className=" mt-4 ">
                     Contacts
                   </Link>
-                  <Link href="/admin/pages/products" className=" mt-4 ">
-                    Products
-                  </Link>
                   <Link href="/admin/pages/users" className=" mt-4 ">
                     Users
                   </Link>

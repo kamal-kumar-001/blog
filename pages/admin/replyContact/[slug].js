@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '../../../components/adminComponents/AdminLayout';
 import WithAuth from '../withAuth';
-import connectDb from '../../../middleware/mongoose';
-import Contact from '../../../models/Contact';
 import RichEditor from '../../../components/adminComponents/RichEditor';
 
 const ReplyToContact = ({contact}) => {
@@ -65,13 +63,16 @@ const ReplyToContact = ({contact}) => {
         </Layout>
     );
 };
-export async function getServerSideProps({ query }) {
-    await connectDb();
-    const contact = await Contact.findOne({ _id: query.slug });
-    return {
-      props: {
-        contact: JSON.parse(JSON.stringify(contact)),
-      },
-    };
-  }
+export async function getServerSideProps({ params }) {
+  const { slug } = params;
+  const baseUrl = process.env.URL;
+  const res = await fetch(`${baseUrl}/api/contact/${slug}`);
+  const contact = await res.json();
+
+  return {
+    props: {
+      contact: contact,
+    },
+  };
+}
 export default WithAuth(ReplyToContact);

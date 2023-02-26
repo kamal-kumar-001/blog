@@ -1,9 +1,5 @@
 import Layout from '../../../components/adminComponents/AdminLayout';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import Contact from '../../../models/Contact';
-import mongoose from 'mongoose'
-import Router from 'next/router';
 import WithAuth from '../withAuth';
 
 const ViewContact = ({ contact }) => {
@@ -56,17 +52,15 @@ const ViewContact = ({ contact }) => {
   );
 };
 
-export async function getServerSideProps(context){
-    if (!mongoose.connections[0].readyState) {
-      await mongoose.connect(process.env.MONGO_URL)
-    }
-  
-    let contact = await Contact.find().sort({createdAt: -1});
-   return {
-      props: {
-          contact: JSON.parse(JSON.stringify(contact)),
-      },
-    }
+export async function getServerSideProps(context) {
+  let baseUrl = process.env.URL
+  const res = await fetch(`${baseUrl}/api/contactApi`);
+  const data = await res.json();
+  return {
+    props: {
+      contact: data.contact,
+    },
+  };
 }
 
-export default ViewContact;
+export default WithAuth(ViewContact);

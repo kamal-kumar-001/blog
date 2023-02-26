@@ -2,9 +2,7 @@ import Layout from '../../../components/adminComponents/AdminLayout';
 import DeleteConfirmationModal from '../../../components/adminComponents/deleteModal';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import Blog from '../../../models/Blog';
 import Router from 'next/router';
-import connectDb from '../../../middleware/mongoose';
 import { MdDelete } from 'react-icons/md'
 import { TiEdit } from 'react-icons/ti'
 
@@ -60,10 +58,10 @@ const Blogs = ({ blogs }) => {
                 <tr key={blog._id}>
                   <td className="border px-4 py-2">{blog.title}</td>
                   <td className="border px-4 py-2">
-                    {blog.user.name}
+                    {blog.user ? blog.user.name : ""}
                   </td>
                   <td className="border px-4 py-2">
-                    {blog.category.name || ""}
+                  {blog.category ? blog.category.name : ""}
                   </td>
                   <td className="border px-4 py-2">
                     {blog.createdAt}
@@ -71,7 +69,7 @@ const Blogs = ({ blogs }) => {
                   <td className="border px-4 py-2">
                     <Link
                       href="/admin/updateBlog/[blog]"
-                      as={`/admin/updateBlog/${blog._id}`}
+                      as={`/admin/updateBlog/${blog.slug}`}
                     >
                       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2">
                         {/* Update */}
@@ -108,16 +106,14 @@ const Blogs = ({ blogs }) => {
 };
 
 export async function getServerSideProps(context) {
-  await connectDb();
-
-  let blogs = await Blog.find().populate('user').populate('category').sort({ createdAt: -1 });
+  let baseUrl = process.env.URL
+  const res = await fetch(`${baseUrl}/api/getBlog`);
+  const data = await res.json();
   return {
     props: {
-      blogs: JSON.parse(JSON.stringify(blogs)),
-
+      blogs: data.getBlogs,
     },
-  }
+  };
 }
-
 export default Blogs;
 

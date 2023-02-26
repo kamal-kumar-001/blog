@@ -1,14 +1,11 @@
 
-import Container from "../components/container";
-import Layout from "../components/Layout";
+import Container from "./container";
+import Layout from "./Layout";
 import React, { useState } from 'react'
+import { MdLocationPin , MdMail} from 'react-icons/md';
+import { ImPhone } from 'react-icons/im';
 
-import {
-  LocationMarkerIcon,
-  MailIcon,
-  PhoneIcon
-} from "@heroicons/react/outline";
-export default function Contact() {
+ const Contact = ({navItems}) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState('');
   const [name, setName] = useState('');
@@ -19,7 +16,7 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch('/api/saveContact', {
+    const res = await fetch('/api/contactApi', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -36,7 +33,7 @@ export default function Contact() {
   };
 
   return (
-    <Layout>
+    <Layout navItems={navItems}>
       <Container>
         <h1 className="mt-2 mb-3 text-3xl font-semibold tracking-tight text-center lg:leading-snug text-brand-primary lg:text-4xl dark:text-white">
           Contact
@@ -48,7 +45,7 @@ export default function Contact() {
         <div className="grid my-10 md:grid-cols-2">
           <div className="my-10">
             <h2 className="text-2xl font-semibold dark:text-white">
-              Contact Stablo
+              Contact Kamal
             </h2>
             <p className="max-w-sm mt-5">
               Have something to say? We are here to help. Fill up the
@@ -57,12 +54,12 @@ export default function Contact() {
 
             <div className="mt-5">
               <div className="flex items-center mt-2 space-x-2 text-dark-600 dark:text-gray-400">
-                <LocationMarkerIcon className="w-4 h-4" />
+                <MdLocationPin className="w-4 h-4" />
                 <span>1734 Sanfransico, CA 93063</span>
               </div>
               {/* {siteconfig?.email && ( */}
                 <div className="flex items-center mt-2 space-x-2 text-dark-600 dark:text-gray-400">
-                  <MailIcon className="w-4 h-4" />
+                  <MdMail className="w-4 h-4" />
                   <a href={`mailto:$kamal@blog.com`}>
                     kamal@blog.com
                   </a>
@@ -70,7 +67,7 @@ export default function Contact() {
               {/* )} */}
               {/* {siteconfig?.phone && ( */}
                 <div className="flex items-center mt-2 space-x-2 text-dark-600 dark:text-gray-400">
-                  <PhoneIcon className="w-4 h-4" />
+                  <ImPhone className="w-4 h-4" />
                   <a href={`tel:$9999999999`}>
                     9999999999
                   </a>
@@ -143,7 +140,7 @@ export default function Contact() {
     </Layout>
   );
 }
-
+export default Contact
 // export async function getStaticProps({ params, preview = false }) {
 //   const config = await getClient(preview).fetch(configQuery);
 

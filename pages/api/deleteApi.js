@@ -3,7 +3,6 @@ import Blog from '../../models/Blog';
 import User from '../../models/User';
 import Category from '../../models/Category';
 import connectDb from '../../middleware/mongoose';
-import Product from '../../models/Shop/Product';
 
 const handler = async (req, res) => {
   if (req.method === 'DELETE') {
@@ -20,9 +19,6 @@ const handler = async (req, res) => {
         break;
       case 'categories':
         deletedDoc = await Category.findByIdAndDelete(id);
-        break;
-      case 'products':
-        deletedDoc = await Product.findByIdAndDelete(id);
         break;
       default:
         return res.status(400).json({ message: 'Invalid collection name' });

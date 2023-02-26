@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
-import User from '../../../models/User';
-import connectDb from '../../../middleware/mongoose';
 import WithAuth from '../withAuth';
 import Link from 'next/link';
 
@@ -22,7 +20,7 @@ const UpdateUser = ({ user }) => {
     });
     if (res.ok) {
       const data = await res.json();
-      Router.push('/admin');
+      Router.push('/admin/pages/users');
     }
   };
 
@@ -33,7 +31,7 @@ const UpdateUser = ({ user }) => {
   <button
       className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
     >
-       <Link href={"/admin"}>Cancel</Link>
+       <Link href={"/admin/pages/users"}>Cancel</Link>
     </button>
   <button
       className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
@@ -98,12 +96,15 @@ const UpdateUser = ({ user }) => {
   );
 };
 
-export async function getServerSideProps({ query }) {
-  await connectDb();
-  const user = await User.findOne({ _id: query.slug });
+export async function getServerSideProps({ params }) {
+  const { slug } = params;
+  const baseUrl = process.env.URL;
+  const res = await fetch(`${baseUrl}/api/user/${slug}`);
+  const user = await res.json();
+
   return {
     props: {
-      user: JSON.parse(JSON.stringify(user)),
+      user: user,
     },
   };
 }

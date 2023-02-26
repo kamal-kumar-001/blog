@@ -1,9 +1,5 @@
 import { useRouter } from 'next/router'
 import React  from 'react'
-import Blog from '../../models/Blog'
-import User from '../../models/User'
-import Category from '../../models/Category'
-import connectDb from '../../middleware/mongoose';
 import Link from 'next/link';
 // import cheerio from 'cheerio';
 // import Head from 'next/head';
@@ -12,44 +8,29 @@ import Container from '../../components/container';
 import CategoryLabel from '../../components/category'
 import { parseISO, format } from "date-fns";
 import Image from "next/image";
-import { NextSeo } from "next-seo";
+import Head from 'next/head';
 // import Pagination from '../../components/Pagination';
 
-const Post = ({ post, author, category, page, pageCount }) => {
+const Post = ({ post, author, category,navItems, page, pageCount }) => {
   const router = useRouter()
   const { slug } = router.query
-
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const [postsPerPage] = useState(1);
-  
-    // useEffect(() => {
-    //   setCurrentPage(router.query.page ? +router.query.page : 1);
-    // }, [router.query.page]);
-  
-    // const indexOfLastPost = currentPage * postsPerPage;
-    // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    // // const currentPosts = blogs.slice(indexOfFirstPost, indexOfLastPost);
-  
-    // const handlePageChange = (page) => {
-    //   setCurrentPage(page);
-    //   router.push(`/post/[slug]?page=${page}`, `/post/${router.query.slug}?page=${page}`, { shallow: true });
-    // };
+  const baseUrl = process.env.URL;
 
   function createMarkup(c) {
     return { __html: c };
   }
 
   return <>
-    <Layout >
+    <Layout navItems={navItems}>
        
   {post &&
   <div>
-    <NextSeo
+    {/* <NextSeo
             title={`${post.title} `}
             description={post.metaContent || ""}
-            canonical={`/post/${post.slug.current}`}
+            canonical={`${baseUrl}/post/${post.slug.current}`}
             openGraph={{
-              url: `/post/${post.slug.current}`,
+              url: `${baseUrl}/post/${post.slug.current}`,
               title: `${post.title} `,
               description: post.metaContent || "",
               images: [
@@ -57,7 +38,7 @@ const Post = ({ post, author, category, page, pageCount }) => {
                   url: post.img || "",
                   width: 800,
                   height: 600,
-                  alt: post.category.name || ""
+                  alt: category.name || ""
                 }
               ],
               site_name: "title"
@@ -65,7 +46,19 @@ const Post = ({ post, author, category, page, pageCount }) => {
             twitter={{
               cardType: "summary_large_image"
             }}
-          /> 
+          />  */}
+          <Head>
+          <title>{post.title || ''}</title>
+        <meta
+          name="description"
+          content={post.metaContent || ''}
+        />
+        <meta
+          name="theme-color"
+          content="#000"
+        />
+        <link rel="icon" href="/favicon.ico" />
+          </Head>
     <Container>
       <div className="max-w-screen-md mx-auto">
         <div className="text-center">
@@ -87,6 +80,9 @@ const Post = ({ post, author, category, page, pageCount }) => {
                   alt={author.name}
                   // placeholder="blur"
                   // layout="fill"
+                  sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
                   fill
                   className="rounded-full object-cover"
                 />
@@ -111,7 +107,7 @@ const Post = ({ post, author, category, page, pageCount }) => {
         </div>
       </div>
     </Container>
-    <div className="relative z-0 max-w-screen-lg mx-auto overflow-hidden lg:rounded-lg aspect-video">
+    {/* <div className="relative z-0 max-w-screen-lg mx-auto overflow-hidden lg:rounded-lg aspect-video">
               <Image
                 src={post.img}
                 // loader={imageProps.loader}
@@ -120,9 +116,13 @@ const Post = ({ post, author, category, page, pageCount }) => {
                 // layout="fill"
                 fill
                 loading="eager"
+                // priority
+                sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
                 // objectFit="cover"
               />
-          </div>
+          </div> */}
     <div className="flex  flex-col-reverse md:flex-row">
       <Container>
         <article className="max-w-screen-md mx-auto">
@@ -130,7 +130,7 @@ const Post = ({ post, author, category, page, pageCount }) => {
           <div className="flex justify-center mt-7 mb-7">
             <Link href="/">
               <span className="px-5 py-2 text-sm text-blue-600 rounded-full dark:text-blue-500 bg-brand-secondary/20">
-                {/* ← View all posts */}
+                ← View all posts
               </span>
             </Link>
           </div>
@@ -149,29 +149,22 @@ const Post = ({ post, author, category, page, pageCount }) => {
 
   </>
 }
-export async function getServerSideProps(context) {
-  await connectDb();
-  let page = context.query.page ? parseInt(context.query.page) : 1;
-  
-  let limit = 1; // number of posts per page
-  // let offset = (page - 1) * limit;
-  let blog = await Blog.findOne({ slug: context.query.slug });
-  const user = await User.findById(blog.user)
-  const category = await Category.findById(blog.category)
-  // let totalPosts = await Blog.countDocuments();
+export async function getServerSideProps({ params }) {
+  const { slug } = params;
+  const baseUrl = process.env.URL;
+  const res = await fetch(`${baseUrl}/api/blog/${slug}`);
+  const blog = await res.json();
+  const navRes = await fetch(`${baseUrl}/api/navApi`);
+  const navData = await navRes.json();
 
   return {
     props: {
-      post: JSON.parse(JSON.stringify(blog)),
-      author: JSON.parse(JSON.stringify(user)),
-      category: JSON.parse(JSON.stringify(category)),
-      // page: page,
-      // pageCount: Math.ceil(totalPosts / 1),
-      // limit: limit,
-      // offset: offset
+      post: blog,
+      author: blog.user,
+      category: blog.category,
+      navItems: navData.navItems,
     },
-  }
+  };
 }
-
 export default Post
   

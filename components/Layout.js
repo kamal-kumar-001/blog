@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import { NextSeo } from "next-seo";
+// import { NextSeo } from "next-seo";
 import Navbar from "./Navbar";
 // import defaultOG from "../public/img/og-default.jpg";
 
@@ -9,7 +9,7 @@ import ChatBot from './Chatbot'
 // import PopupWidget from "../components/popupWidget";
 
 export default function Layout(props) {
-  const { children } = props;
+  const { children, navItems } = props;
 //   const ogimage = GetImage(props?.openGraphImage)?.src ?? "";
   return (
     <>
@@ -17,7 +17,7 @@ export default function Layout(props) {
         <link rel="preconnect" href="/" />
         <link rel="dns-prefetch" href="/" />
       </Head>
-      <NextSeo
+      {/* <NextSeo
         title={props.title}
         description={props.description}
         canonical={props.url}
@@ -40,7 +40,7 @@ export default function Layout(props) {
           site: "@",
           cardType: "summary_large_image"
         }}
-      />
+      /> */}
 
       <div className="antialiased text-gray-800 dark:bg-black dark:text-gray-100">
         <Navbar {...props} />

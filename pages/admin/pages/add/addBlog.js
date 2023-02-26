@@ -1,29 +1,24 @@
-import User from '../../../../models/User';
-import Category from '../../../../models/Category';
 import WithAuth from '../../withAuth';
 import BlogForm from "../../../../components/adminComponents/BlogForm";
-import connectDb from '../../../../middleware/mongoose';
 
 
 const AdminAddBlog = ({ categories, users }) => {
   return <BlogForm initialValues={{}} mode="add" categories={categories} users={users}/>;
 };
 export async function getServerSideProps(context) {
-
-  await connectDb();
-
-  let categories = await Category.find();
-  let user = await User.find();
-  // console.log(categories)
+  const baseUrl = process.env.URL
+  const catRes = await fetch(`${baseUrl}/api/getCategory`);
+  const categoryData = await catRes.json();
+  const res = await fetch(`${baseUrl}/api/getUser`);
+  const data = await res.json();
+  // console.log(catRes)
   return {
     props: {
-      categories: JSON.parse(JSON.stringify(categories)),
-      users: JSON.parse(JSON.stringify(user)),
+      categories: categoryData.categories,
+      users: data.users,
     },
   }
 }
 export default WithAuth(AdminAddBlog);
-
-
 
 

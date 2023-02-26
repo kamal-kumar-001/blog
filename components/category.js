@@ -9,8 +9,7 @@ export default function CategoryLabel({ categories }) {
            >
               {/* <Label color={category.color}>{category.title}</Label> */}
               <span className="inline-block mt-5 text-xs font-medium tracking-wider uppercase ">
-              {/* {categories ? categories.name : 'unknown'} */}
-              {categories.name}
+              {categories ? categories.name : ''}
               </span>
           </Link>
         {/* ))} */}

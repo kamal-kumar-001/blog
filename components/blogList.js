@@ -26,7 +26,7 @@ const BlogList = ({ blogs, aspect }) => {
                 // objectFit="cover"
                 className="transition-all object-cover h-full w-full"
                 quality="50"
-                  // priority
+                  priority
                   // loading="lazy"
                   sizes="(max-width: 768px) 30vw, 33vw"
                   fill

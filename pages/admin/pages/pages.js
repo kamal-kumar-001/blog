@@ -2,8 +2,6 @@ import Layout from '../../../components/adminComponents/AdminLayout';
 import Link from 'next/link';
 import React from 'react';
 import Router from 'next/router';
-import connectDb from '../../../middleware/mongoose';
-import Page from '../../../models/Page';
 
 const Pages = ({ pages }) => {
   const handleDelete = async (collection, id) => {
@@ -54,8 +52,8 @@ const Pages = ({ pages }) => {
                 </td>
                 <td className="border px-4 py-2">
                   <Link
-                    href="/admin/updatePage/[page]" 
-                    as={`/admin/updatePage/${page._id}`}
+                    href="/admin/updatePage/[[...slug]]" 
+                    as={`/admin/updatePage/${page.slug}`}
                   >
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2">
                       Update
@@ -79,17 +77,15 @@ const Pages = ({ pages }) => {
   );
 };
 
-export async function getServerSideProps(context){
-    await connectDb();
-  
-    let pages = await Page.find().sort({createdAt: -1});
-   return {
-      props: {
-          pages: JSON.parse(JSON.stringify(pages)),
-
-      },
-    }
+export async function getServerSideProps(context) {
+  let baseUrl = process.env.URL
+  const res = await fetch(`${baseUrl}/api/pageApi`);
+  const data = await res.json();
+  return {
+    props: {
+      pages: data.pages,
+    },
+  };
 }
-
 export default Pages;
 

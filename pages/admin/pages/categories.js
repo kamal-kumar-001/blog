@@ -1,9 +1,7 @@
 import Layout from '../../../components/adminComponents/AdminLayout';
 import Link from 'next/link';
-import React, {useState, useEffect} from 'react';
-import Category from '../../../models/Category';
+import React  from 'react';
 import Router from 'next/router';
-import connectDb from '../../../middleware/mongoose';
 
 const Categories = ({ categories }) => {
   const handleDelete = async (collection, id) => {
@@ -77,16 +75,15 @@ const Categories = ({ categories }) => {
   );
 };
 
-export async function getServerSideProps(context){
-    await connectDb();
-  
-    let categories = await Category.find().sort({createdAt: -1});
-
-   return {
-      props: {
-          categories: JSON.parse(JSON.stringify(categories)),
-      },
-    }
+export async function getServerSideProps(context) {
+  let baseUrl = process.env.URL
+  const res = await fetch(`${baseUrl}/api/getCategory`);
+  const data = await res.json();
+  return {
+    props: {
+      categories: data.categories,
+    },
+  };
 }
 
 export default Categories;

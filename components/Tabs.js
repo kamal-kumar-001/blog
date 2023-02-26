@@ -28,12 +28,12 @@ const Tabs = ({ categories }) => {
                     className={
                         'mr-6 py-3  rounded-sm ' +
                         `${
-                            router.pathname === '/'
+                            router.pathname === '/blog'
                                 ? ' text-primary'
                                 : ' text-gray-400'
                         }`
                     }>
-                    <Link href="/">Recent</Link>
+                    <Link href="/blog">Recent</Link>
                 </li>
                 {categories && categories.length > 0 && categories.map((category) => {
                     return (

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '../../../components/adminComponents/AdminLayout';
 import WithAuth from '../withAuth';
-import Email from '../../../models/Email';
-import connectDb from '../../../middleware/mongoose';
 import Link from 'next/link';
 import RichEditor from '../../../components/adminComponents/RichEditor';
 
@@ -31,7 +29,7 @@ const SendEmailToAll = ({email}) => {
 
   return (
     <Layout>
-       {/* <table className="table-auto w-full mt-4">
+       <table className="table-auto w-full mt-4">
           <thead>
             <tr>
               <th className="px-4 py-2">Name</th>
@@ -62,7 +60,6 @@ const SendEmailToAll = ({email}) => {
                   <button
                     className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
                     onClick={() => handleDelete('emails', email._id)}
-                    // onClick={() => handleDelete(blog._id)}
                   >
                     Delete
                   </button>
@@ -70,7 +67,7 @@ const SendEmailToAll = ({email}) => {
               </tr>
             ))}
           </tbody>
-        </table> */}
+        </table>
   <form onSubmit={handleSubmit} className="flex flex-col">
   {message && <p className='text-green-500'>{message}</p>}
   <div className="flex gap-5 justify-between">
@@ -94,27 +91,19 @@ const SendEmailToAll = ({email}) => {
             onChange={e => setEmailSubject(e.target.value)} className="w-full px-3 py-2 mb-4 border border-gray-400 rounded-lg"  />
     <label htmlFor="body">Body:</label>
              <RichEditor content={emailBody} setContent={setEmailBody}/>
-    {/* <label htmlFor="body">Html Body:</label>
-    <textarea type="text" id="body"
-            value={emailBody}
-            rows="5"
-            required
-            onChange={e => setEmailBody(e.target.value)}
-             className="w-full px-3 py-2 mb-4 border border-gray-400 rounded-lg"  
-             /> */}
-    {/* <button type="submit" className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">Send</button> */}
   </form>
  
     </Layout>
   );
 };
 
-export async function getServerSideProps({ query }) {
-  await connectDb();
-  const email = await Email.find();
+export async function getServerSideProps(context) {
+  let baseUrl = process.env.URL
+  const res = await fetch(`${baseUrl}/api/emailApi`);
+  const data = await res.json();
   return {
     props: {
-      email: JSON.parse(JSON.stringify(email)),
+      email: data.emails,
     },
   };
 }

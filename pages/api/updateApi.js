@@ -2,21 +2,9 @@ import connectDb from '../../middleware/mongoose';
 import Blog from '../../models/Blog';
 import User from '../../models/User';
 import Category from '../../models/Category';
-import Product from '../../models/Shop/Product';
 import NavItem from '../../models/NavItem';
 import bcrypt from 'bcrypt';
 import Page from '../../models/Page';
-// import multer from 'multer';
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'public/images');
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, `${Date.now()}-${file.originalname}`);
-//   },
-// });
-
-// const upload = multer({ storage });
 
 const handler = async (req, res) => {
   
@@ -35,9 +23,6 @@ const handler = async (req, res) => {
           break;
         case 'categories':
           updateDoc = await new Category({ name: req.body.name, slug: req.body.slug }).save();
-          break;
-        case 'products':
-          updateDoc = await new Product({ title: req.body.title, slug: req.body.slug, content: req.body.content, img: req.body.img, price: req.body.price, }).save();
           break;
         case 'navItems':
           updateDoc = await new NavItem({ position: req.body.position, name: req.body.name, slug: req.body.slug, }).save();
