@@ -78,7 +78,8 @@ const Pages = ({ pages }) => {
 };
 
 export async function getServerSideProps(context) {
-  let baseUrl = process.env.URL
+  // let baseUrl = process.env.URL
+  let baseUrl = 'https://blog-jcxn.vercel.app/'
   const res = await fetch(`${baseUrl}/api/pageApi`);
   const data = await res.json();
   return {

@@ -213,7 +213,8 @@ const Post = ({ post, author, relatedBlogs, category, navItems, categories, page
 }
 export async function getServerSideProps({ params }) {
   const { slug } = params;
-  const baseUrl = process.env.URL;
+  // const baseUrl = process.env.URL;
+  let baseUrl = 'https://blog-jcxn.vercel.app/'
   const res = await fetch(`${baseUrl}/api/blog/${slug}`);
   const { blog, relatedBlogs } = await res.json();
   const navRes = await fetch(`${baseUrl}/api/navApi`);

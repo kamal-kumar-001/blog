@@ -11,7 +11,8 @@ const UpdateBlog = ({ blog, categories, users }) => {
 };
 export async function getServerSideProps({ params }) {
   const { slug } = params;
-  const baseUrl = process.env.URL;
+  // const baseUrl = process.env.URL;
+  let baseUrl = 'https://blog-jcxn.vercel.app/'
   const res = await fetch(`${baseUrl}/api/updateBlog/${slug}`);
   const blog = await res.json();
   const userRes = await fetch(`${baseUrl}/api/getUser`);

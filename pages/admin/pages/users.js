@@ -77,7 +77,8 @@ const Admin = ({ users }) => {
 };
 
 export async function getServerSideProps(context) {
-  let baseUrl = process.env.URL
+  // let baseUrl = process.env.URL
+  let baseUrl = 'https://blog-jcxn.vercel.app/'
   const res = await fetch(`${baseUrl}/api/getUser`);
   const data = await res.json();
   return {

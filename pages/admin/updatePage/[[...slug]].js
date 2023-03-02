@@ -10,7 +10,8 @@ const UpdatePage = ({ page }) => {
 };
 export async function getServerSideProps({ params }) {
   const { slug } = params;
-  const baseUrl = process.env.URL;
+  // const baseUrl = process.env.URL;
+  let baseUrl = 'https://blog-jcxn.vercel.app/'
   const path = Array.isArray(slug) ? slug.join('/') : slug;
   const res = await fetch(`${baseUrl}/api/page/${path}`);
   const page = await res.json();

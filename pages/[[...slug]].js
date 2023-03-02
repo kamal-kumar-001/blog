@@ -85,7 +85,9 @@ const DefaultPage = ({categories, blogs, allBlogs, navItems, page }) => {
 };
 
 export async function getServerSideProps({ params }) {
-  let baseUrl = process.env.URL
+  // let baseUrl = process.env.URL
+  let baseUrl = 'https://blog-jcxn.vercel.app/'
+
   const { slug } = params;
   const res = await fetch(`${baseUrl}/api/getBlog`);
   const data = await res.json();

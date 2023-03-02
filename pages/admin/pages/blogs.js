@@ -105,7 +105,8 @@ const Blogs = ({ blogs }) => {
 };
 
 export async function getServerSideProps(context) {
-  let baseUrl = process.env.URL
+  // let baseUrl = process.env.URL
+  let baseUrl = 'https://blog-jcxn.vercel.app/'
   const res = await fetch(`${baseUrl}/api/getBlog`);
   const data = await res.json();
   return {

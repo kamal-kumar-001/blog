@@ -159,7 +159,8 @@ const handleDeleteSubitemForm = (id) => {
 };
 export async function getServerSideProps({ params }) {
   const { slug } = params;
-  const baseUrl = process.env.URL;
+  // const baseUrl = process.env.URL;
+  let baseUrl = 'https://blog-jcxn.vercel.app/'
   const res = await fetch(`${baseUrl}/api/nav/${slug}`);
   const nav = await res.json();
 
