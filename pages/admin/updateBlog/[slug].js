@@ -12,7 +12,7 @@ const UpdateBlog = ({ blog, categories, users }) => {
 export async function getServerSideProps({ params }) {
   const { slug } = params;
   const baseUrl = process.env.URL;
-  const res = await fetch(`${baseUrl}/api/blog/${slug}`);
+  const res = await fetch(`${baseUrl}/api/updateBlog/${slug}`);
   const blog = await res.json();
   const userRes = await fetch(`${baseUrl}/api/getUser`);
   const usersData = await userRes.json();

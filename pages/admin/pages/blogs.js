@@ -17,7 +17,6 @@ const Blogs = ({ blogs }) => {
     setShowConfirmationModal(true);
   };
   
-
   const handleDelete = async (collection, id) => {
     console.log('Deleting blog with id:', id);
     const res = await fetch(`/api/deleteApi?collection=${collection}&id=${id}`, {
@@ -69,7 +68,7 @@ const Blogs = ({ blogs }) => {
                   <td className="border px-4 py-2">
                     <Link
                       href="/admin/updateBlog/[blog]"
-                      as={`/admin/updateBlog/${blog.slug}`}
+                      as={`/admin/updateBlog/${blog._id}`}
                     >
                       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2">
                         {/* Update */}

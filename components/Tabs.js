@@ -1,12 +1,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-// import mongoose from 'mongoose';
-// import Category from '../models/Category';
 
 
 const Tabs = ({ categories }) => {
-// const Tabs = ({ categories, handleOnSearch }: CategoryProps) => {
     const router = useRouter();
 
     const isActiveLink = (category) => {
@@ -22,18 +19,13 @@ const Tabs = ({ categories }) => {
       }
       `}
 </style>
-        <div className="  overflow-x-auto  mb-8  bg-white dark:bg-black  pt-2 border-b-2 border-gray-100 dark:border-gray-800 scroll-hidden sticky top-12 z-10 md:top-16">
+        <div className="  overflow-x-auto  mb-8  bg-white dark:bg-black  border-b-2 border-gray-100 dark:border-gray-800 scroll-hidden sticky top-12 z-10 md:top-16">
             <ul className="flex items-center container px-6 mx-auto w-max md:w-auto">
                 <li
                     className={
-                        'mr-6 py-3  rounded-sm ' +
-                        `${
-                            router.pathname === '/blog'
-                                ? ' text-primary'
-                                : ' text-gray-400'
-                        }`
+                        'mr-6 py-3  rounded-sm ' + `${ router.asPath === '/blog'  ? ' text-primary dark:text-white' : ' text-gray-400' }`
                     }>
-                    <Link href="/blog">Recent</Link>
+                    <Link href="/blog">All</Link>
                 </li>
                 {categories && categories.length > 0 && categories.map((category) => {
                     return (

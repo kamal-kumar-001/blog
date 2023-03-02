@@ -98,7 +98,7 @@ const ThemeSwitch = () => {
   };
 
   return (
-    <div className="md:inline-flex hidden items-center">
+    <div className="md:inline-flex  items-center">
       
       <label className="flex items-center cursor-pointer">
         <div className={`relative w-10 h-5 transition duration-200 ease-linear rounded-full ${isDarkMode ? 'bg-gray-800' : 'bg-gray-200'}`}>

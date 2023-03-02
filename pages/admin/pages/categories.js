@@ -34,7 +34,7 @@ const Categories = ({ categories }) => {
             <tr>
               <th className="px-4 py-2">Categories</th>
               <th className="px-4 py-2">Slug</th>
-              <th className="px-4 py-2">Created At</th>
+              <th className="px-4 py-2">Post Count</th>
               <th className="px-4 py-2">Actions</th>
             </tr>
           </thead>
@@ -46,7 +46,7 @@ const Categories = ({ categories }) => {
                   {category.slug}
                 </td>
                 <td className="border px-4 py-2">
-                  {category.createdAt}
+                  {category.postCount}
                 </td>
                 <td className="border px-4 py-2">
                   <Link

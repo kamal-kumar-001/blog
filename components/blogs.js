@@ -5,7 +5,8 @@ import { useRouter } from 'next/router';
 import Layout from './Layout';
 import Container from './container';
 
-import React from "react";
+import React, { Suspense } from "react";
+import Loading from './Loading';
 
 const Blog = ({ categories, blogs, navItems, page, pageCount }) => {
   const router = useRouter();
@@ -45,9 +46,11 @@ const Blog = ({ categories, blogs, navItems, page, pageCount }) => {
                 test
               </summary>
             </details> */}
+            <Suspense fallback={<Loading />}>
         <div className="grid gap-10 mt-10 lg:gap-10 md:grid-cols-2 lg:grid-cols-3 ">
           <BlogList blogs={blogs} aspect="landscape" />
         </div>
+</Suspense>
         {/* <Pagination page={page} pageCount={pageCount} /> */}
       </Container>
     </Layout>

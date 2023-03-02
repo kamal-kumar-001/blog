@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Search from './Search'
 import ThemeSwitch from "../components/themeSwitch";
-import { BiChevronDown, BiMenu } from 'react-icons/bi';
+import { BiChevronDown, BiMenu,BiSearch } from 'react-icons/bi';
 import { IoMdClose } from 'react-icons/io';
 import { RiArrowUpSLine } from 'react-icons/ri';
 
 export default function Navbar({ navItems }) {
+  
+  const [searchModal, setSearchModal] = useState(false);
+
+  const showSearchModal = () => {
+    setSearchModal(!searchModal);
+  };
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -20,19 +27,22 @@ export default function Navbar({ navItems }) {
 
   return (
     <header className="bg-white dark:bg-black sticky  z-20 top-0">
-      <nav className="container mx-auto px-4 lg:px-6 py-4 lg:pb-0 md:pb-0">
+      <nav className="container mx-auto px-4 lg:px-6 py-2">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center">
           <div className="flex md:flex-1 justify-between items-center">
-            <div className="flex  items-center">
-              <Link className=" text-xl font-bold md:text-2xl hover:text-gray-700" href="/">Blog</Link>
+            <div className="flex flex-grow items-center">
+              <Link className="  text-xl font-bold md:text-2xl hover:text-gray-700" href="/">Blog</Link>
             </div>
+          
+          {!searchModal ? <button onClick={showSearchModal} className="cursor-pointer">
+          <BiSearch   className='w-[20px] h-[20px] font-bold ' />
+          </button> : <Search show={showSearchModal}/>}
             <div className="flex md:hidden">
               <button onClick={handleClick} type="button" className="  focus:outline-none " aria-label="toggle menu">
                  {!click ? <BiMenu size={30} />: <IoMdClose size={30} />}
               </button>
             </div>
           </div>
-          <ThemeSwitch />
           <div className={click ? "md:flex items-center block" : "md:flex items-center hidden "}>
             <div className="flex flex-col md:items-center mt-2 md:flex-row md:mt-0 md:mx-1 md:space-y-0 space-y-2">
               {navItems && navItems.map((item, index) => (
@@ -64,6 +74,7 @@ export default function Navbar({ navItems }) {
                   )}
                 </React.Fragment>
               ))}
+              <ThemeSwitch />
             </div>
           </div>
         </div>
